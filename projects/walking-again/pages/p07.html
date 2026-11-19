@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Walking Again — 06. Strength</title>
+<link rel="stylesheet" href="../assets/page.css">
+<style>
+  .ct { grid-template-columns: 1.6fr 1fr; }
+  .col { display: flex; flex-direction: column; }
+  .hg { flex: 1; min-height: 0; display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: 1fr 1fr; gap: 10px; }
+  .hc { display: flex; flex-direction: column; min-height: 0; }
+  .hc .fbox { flex: 1; }
+  .ht { font-size: 13px; color: #555; margin-top: 4px; }
+  .cb { display: flex; align-items: center; gap: 8px; font-size: 13px; margin-top: 10px; }
+  .cb .grad { width: 300px; height: 10px; background: linear-gradient(90deg, #c9def0 0%, #8fbfe0 20%, #c7e3b4 40%, #fde68a 55%, #fdae61 70%, #f46d43 85%, #c0262d 100%); }
+  .cb .over { width: 28px; height: 10px; background: #6a1b9a; margin-left: 8px; }
+  .cb em { font-style: normal; color: #555; margin-left: 18px; }
+</style>
+</head>
+<body>
+<div class="stage"><div class="pg">
+  <header class="hd">
+    <h1 class="a">6. Strength</h1>
+    <p class="lede a">Under a 100 kg user every member and joint stays within its allowable stress, except the reused handlebar, whose wall thickness must be measured.</p>
+    <div class="rule"></div>
+  </header>
+  <div class="ct">
+    <figure class="fig a" style="height:100%">
+      <div class="hg">
+        <div class="hc"><div class="fbox white contain"><img src="../assets/heat-seated.jpg" alt="Seated load, 1,197 N" data-full="../assets/heat-seated.jpg"><span class="tag">a</span></div><div class="ht">Seated load, 1,197 N</div></div>
+        <div class="hc"><div class="fbox white contain"><img src="../assets/heat-handgrips.jpg" alt="Full weight on the handgrips, 1,197 N" data-full="../assets/heat-handgrips.jpg"><span class="tag">b</span></div><div class="ht">Full weight on the handgrips, 1,197 N</div></div>
+        <div class="hc"><div class="fbox white contain"><img src="../assets/heat-backrest.jpg" alt="Seated + 400 N on the backrest" data-full="../assets/heat-backrest.jpg"><span class="tag">c</span></div><div class="ht">Seated + 400 N on the backrest</div></div>
+        <div class="hc"><div class="fbox white contain"><img src="../assets/heat-fatigue.jpg" alt="Fatigue, 795 N for 2 × 10⁵ cycles" data-full="../assets/heat-fatigue.jpg"><span class="tag">d</span></div><div class="ht">Fatigue, 795 N for 2 × 10⁵ cycles</div></div>
+      </div>
+      <div class="cb"><span>0</span><div class="grad"></div><span>1.0</span><div class="over"></div><span>&gt; 1.0</span><em>Utilisation U = σ<sub>vM</sub> / allowable stress</em></div>
+      <figcaption class="cap"><b>Figure 9.</b> Beam finite-element results mapped onto the model. Members are coloured along their length; clamps, pins, U-bolts and bushings are filled with their own check value; white parts are bought-in. Baskets hidden.</figcaption>
+    </figure>
+    <div class="col">
+      <div class="sec a"><div class="label"><b>6.1</b>Frame</div><p class="lead">The reused aluminium frame works at 55% of its capacity when sat on.</p><p class="body">Peak stress sits at the original seatstay weld. In fatigue the seatstays reach U = 0.86 and the chainstays 0.56.</p></div>
+      <div class="sec a"><div class="label"><b>6.2</b>Weak point</div><p class="lead">The handlebar reaches U = 1.22 if its wall is 1.8 mm.</p><p class="body">The value falls to 1.07 at 2.2 mm and 0.98 at 2.5 mm. The Hello bar must be measured; if it is thinner, an internal steel sleeve at the clamp restores the margin.</p></div>
+      <div class="sec a"><div class="label"><b>6.3</b>Joints</div><p class="lead">The seat-post quick release is the most loaded joint, at 0.67.</p><p class="body">Under the backrest load the rear cross-tube reaches 0.73 and its M6 set screw 0.55. Maximum deflection is 8.0 mm, at the grips.</p></div>
+    </div>
+  </div>
+</div></div>
+<script src="../assets/page.js"></script>
+
+</body>
+</html>

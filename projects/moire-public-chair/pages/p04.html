@@ -1,0 +1,469 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>3. Principle and Route Selection</title>
+<style>
+/* Fixed 1920x1080 sheet, scaled to fit the window. Palette: black / greys / one red. */
+:root {
+  --ink: #1E1E1E; --g1: #555555; --g2: #8C8C8C; --g3: #BDBDBD; --g4: #E6E6E6; --red: #D9532B; --paper: #FFFFFF;
+  --serif: "Times New Roman", Times, "Liberation Serif", serif;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; height: 100%; background: #F2F2F2; overflow: hidden; }
+body { font-family: var(--serif); color: var(--ink); }
+#fit { position: absolute; left: 0; top: 0; transform-origin: 0 0; }
+.sheet { width: 1920px; height: 1080px; background: var(--paper); position: relative; padding: 150px 56px 30px 150px; display: grid;
+  grid-template-rows: auto 392px 1fr; row-gap: 16px; }
+h1 { margin: 0; font-size: 30px; font-weight: bold; letter-spacing: 0.005em; }
+.lede { margin: 6px 0 0; font-size: 16px; color: var(--g1); max-width: 1180px; }
+.label { margin: 0 0 6px; font-size: 14px; font-weight: bold; letter-spacing: 0.06em; text-transform: uppercase; color: var(--g1); }
+.lead { margin: 0 0 6px; font-size: 22px; line-height: 1.25; }
+.label .n { color: var(--red); margin-right: 8px; }
+.q { margin: 0 0 8px; font-size: 14px; color: var(--g1); }
+.row1 { display: grid; grid-template-columns: 1fr 1fr 1fr; column-gap: 44px; min-height: 0; }
+.col { display: flex; flex-direction: column; min-width: 0; border-top: 1.4px solid var(--ink); padding-top: 12px; }
+table { border-collapse: collapse; width: 100%; font-size: 13px; }
+th { text-align: left; font-weight: bold; font-size: 13px; padding: 5px 6px 5px 0; border-bottom: 0.8px solid var(--ink); }
+td { padding: 4px 6px 4px 0; border-bottom: 0.6px solid var(--g4); vertical-align: middle; }
+tr.pick td { color: var(--red); }
+tr.pick td:first-child { font-weight: bold; }
+.ok { color: var(--ink); } .no { color: var(--g2); }
+.mk { font-size: 14px; }
+.note { margin: 8px 0 0; font-size: 13px; color: var(--g1); line-height: 1.45; }
+.note b { color: var(--ink); }
+/* 3.1 moiré types */
+.types { display: grid; grid-template-columns: 1fr 1fr; gap: 8px 14px; }
+.type { display: grid; grid-template-columns: 96px 1fr; gap: 10px; align-items: start; }
+.type canvas { width: 96px; height: 72px; border: 0.6px solid var(--g3); display: block; }
+.type h3 { margin: 0; font-size: 13px; font-weight: bold; }
+.type p { margin: 2px 0 0; font-size: 13px; line-height: 1.3; color: var(--g1); }
+.type.pick h3 { color: var(--red); }
+.type.pick canvas { border: 1.4px solid var(--red); }
+/* 3.2 layouts */
+.lay { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 8px; }
+.lay figure { margin: 0; }
+.lay svg { width: 100%; height: 80px; display: block; }
+.lay figcaption { font-size: 13px; color: var(--g1); line-height: 1.3; margin-top: 2px; }
+.lay figcaption b { color: var(--ink); }
+.lay .pick figcaption b { color: var(--red); }
+.formula { font-size: 22px; margin: 4px 0 8px; }
+.formula i { font-style: italic; }
+/* row 2 demo */
+.row2 { display: grid; grid-template-columns: 480px 270px 1fr; column-gap: 32px; border-top: 1.4px solid var(--ink); padding-top: 12px; min-height: 0; }
+.stage { position: relative; width: 480px; height: 360px; background: var(--g4); }
+.stage canvas { width: 100%; height: 100%; display: block; cursor: ew-resize; touch-action: pan-y; }
+.tag { display: block; font-size: 12px; color: var(--g1); margin-top: 4px; }
+.plates { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.plates .box { position: relative; height: 336px; border: 0.6px solid var(--g3); }
+.plates canvas { width: 100%; height: 100%; display: block; }
+.plates .cap { font-size: 12px; color: var(--g1); margin-top: 4px; line-height: 1.3; }
+.panel { display: flex; flex-direction: column; gap: 9px; min-width: 0; }
+.ctl { display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; }
+.ctl .lab { font-size: 13px; font-weight: bold; width: 74px; }
+.seg { display: flex; border: 0.8px solid var(--ink); }
+.seg button { font: inherit; font-size: 13px; padding: 4px 12px; background: #fff; color: var(--ink); border: 0; border-left: 0.8px solid var(--ink); cursor: pointer; }
+.seg button:first-child { border-left: 0; }
+.seg button[aria-pressed="true"] { background: var(--red); color: #fff; }
+.seg button:focus-visible { outline: 2px solid var(--red); outline-offset: 2px; }
+.read { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px 18px; margin: 4px 0 0; border-top: 0.6px solid var(--g3); padding-top: 10px; }
+.read div { display: flex; flex-direction: column; }
+.read dt { font-size: 13px; color: var(--g1); }
+.read dd { margin: 0; font-size: 20px; font-variant-numeric: tabular-nums; }
+.read dd small { font-size: 12px; color: var(--g1); margin-left: 4px; }
+.decide { margin-top: 14px; border-left: 3px solid var(--red); padding: 6px 0 6px 14px; }
+.decide h3 { margin: 0 0 4px; font-size: 14px; font-weight: bold; letter-spacing: 0.06em; text-transform: uppercase; color: var(--g1); }
+.decide p { margin: 0; font-size: 14px; line-height: 1.45; }
+.nogl { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; text-align: center; font-size: 14px; color: var(--g1); padding: 20px; }
+</style>
+</head>
+<body>
+<div id="fit"><div class="sheet">
+
+<header>
+  <h1>3. Principle and Route Selection</h1>
+  <p class="lede">Three decisions turned an accidental effect into a buildable design: which moiré, where the two gratings sit, and how fine they can be.</p>
+</header>
+
+<div class="row1">
+  <!-- 3.1 -->
+  <section class="col">
+    <p class="label"><span class="n">3.1</span>Which moiré</p>
+    <p class="lead">Only phase modulation shows any image with 4 mm cuts.</p>
+    <p class="q">Criteria: chosen image · open area ≥ 50 % · features ≥ 4 mm</p>
+    <div class="types">
+      <div class="type"><canvas id="t0" width="192" height="144"></canvas><div><h3>Line fringes</h3><p>Two plain gratings. Robust and easy to cut, but only produces bands, never an image.</p></div></div>
+      <div class="type"><canvas id="t1" width="192" height="144"></canvas><div><h3>Shape moiré</h3><p>Magnifies a repeated micro-motif. Motif must be far smaller than 4 mm features allow.</p></div></div>
+      <div class="type"><canvas id="t2" width="192" height="144"></canvas><div><h3>Frame animation</h3><p>Barrier grid over interlaced frames. Slits of 1/n period: dark, fragile, and needs exact registration.</p></div></div>
+      <div class="type pick"><canvas id="t3" width="192" height="144"></canvas><div><h3>Phase modulation ✓</h3><p>Rear slots bend by half a period inside the image. 50 % open, any image, inverts as the viewer moves.</p></div></div>
+    </div>
+    <table style="margin-top:10px">
+      <tr><th></th><th>Image</th><th>Open area</th><th>Cut ≥ 4 mm</th><th>Position tolerance</th></tr>
+      <tr><td>Line fringes</td><td class="no">none</td><td>50 %</td><td>yes</td><td>high</td></tr>
+      <tr><td>Shape moiré</td><td>motif only</td><td>≈ 30 %</td><td class="no">no</td><td class="no">low</td></tr>
+      <tr><td>Frame animation</td><td>any</td><td class="no">1 / n</td><td class="no">no</td><td class="no">low</td></tr>
+      <tr class="pick"><td>Phase modulation</td><td>any</td><td>50 %</td><td>yes</td><td>medium</td></tr>
+    </table>
+  </section>
+
+  <!-- 3.2 -->
+  <section class="col">
+    <p class="label"><span class="n">3.2</span>Where the layers sit</p>
+    <p class="lead">Two chairs 2 m apart give the fastest, sharpest response.</p>
+    <div class="lay">
+      <figure><svg viewBox="0 0 180 118" id="L0"></svg><figcaption><b>(a) Double skin</b><br>two plates on one chair, <i>d</i> ≈ 150 mm</figcaption></figure>
+      <figure><svg viewBox="0 0 180 118" id="L1"></svg><figcaption><b>(b) Split backs</b><br>each back half front, half rear</figcaption></figure>
+      <figure class="pick"><svg viewBox="0 0 180 118" id="L2"></svg><figcaption><b>(c) Two chairs ✓</b><br>one layer per chair, <i>d</i> = 2000 mm</figcaption></figure>
+    </div>
+    <table>
+      <tr><th></th><th><i>d</i></th><th>Inversion step Δ<i>x</i></th><th>63 / Δ<i>x</i></th><th>Window</th></tr>
+      <tr><td>(a)</td><td>150</td><td>265 mm</td><td>0.24 <span class="no">blur</span></td><td>full</td></tr>
+      <tr><td>(b)</td><td>2000</td><td>31.5 mm</td><td>2.00</td><td class="no">half + noise</td></tr>
+      <tr class="pick"><td>(c)</td><td>2000</td><td>31.5 mm</td><td>2.00</td><td>full</td></tr>
+    </table>
+    <p class="note">Δ<i>x</i> = <i>p</i><sub>B</sub><i>D</i> / <i>d</i>, with <i>p</i><sub>A</sub> = 12.6 mm and <i>D</i> = 3000 mm. A wide gap makes the image flip every 31.5 mm of walking, and 63 / Δ<i>x</i> = 2 keeps both eyes in phase. <b>(c)</b> also needs one plate per chair, keeps each chair a single folded sheet, and places the image in the space <i>between</i> two seats.</p>
+  </section>
+
+  <!-- 3.3 -->
+  <section class="col">
+    <p class="label"><span class="n">3.3</span>Grating period</p>
+    <p class="lead">12.6 / 21 mm balances detail against tolerance.</p>
+    <div class="formula"><i>p</i><sub>B</sub> · <i>D</i> / (<i>D</i> + <i>d</i>) = <i>p</i><sub>A</sub> &nbsp;⇒&nbsp; 21 × 3000 / 5000 = 12.6</div>
+    <table>
+      <tr><th><i>p</i><sub>A</sub> / <i>p</i><sub>B</sub> (mm)</th><th>Slot / bar</th><th>Columns in image</th><th>Clear range</th><th>Note</th></tr>
+      <tr><td>25 / 41.7</td><td>12.5 / 20.8</td><td>≈ 9</td><td>2.5–3.6 m</td><td class="no">coarse image</td></tr>
+      <tr class="pick"><td>12.6 / 21</td><td>6.3 / 10.5</td><td>≈ 17</td><td>2.75–3.3 m</td><td>balanced</td></tr>
+      <tr><td>8.4 / 14</td><td>4.2 / 7.0</td><td>≈ 26</td><td>2.85–3.2 m</td><td class="no">at 4 mm limit</td></tr>
+    </table>
+    <p class="note">Slot and bar must each be ≥ 4 mm in 4 mm steel, so <i>p</i><sub>A</sub> ≥ 8 mm. Finer periods sharpen the image but narrow the distance band in which it stays clear and leave thin bars that warp in cutting. <b>12.6 / 21 mm</b> was chosen after comparing all three in simulation.</p>
+    <div class="decide">
+      <h3>Route chosen</h3>
+      <p>Phase-modulated moiré, one grating per chair, chairs 2 m apart with a 0.6 m offset, periods 12.6 / 21 mm.</p>
+    </div>
+  </section>
+</div>
+
+<!-- 3.4 simulation -->
+<section class="row2">
+  <div>
+    <div class="stage" id="stage"><canvas id="view" width="960" height="720" aria-label="Simulated view through both backrests; drag sideways to move the observer"></canvas></div><span class="tag">Observer's view through Chair A to Chair B · drag sideways to walk</span>
+  </div>
+  <div>
+    <div class="plates">
+      <div><div class="box"><canvas id="plateA" width="200" height="607" aria-label="Chair A cutting pattern"></canvas></div><div class="cap">Chair A · front layer<br>straight slots</div></div>
+      <div><div class="box"><canvas id="plateB" width="200" height="607" aria-label="Chair B cutting pattern"></canvas></div><div class="cap">Chair B · rear layer<br>image hidden in slot bends</div></div>
+    </div>
+  </div>
+  <div class="panel">
+    <p class="label" style="margin:0"><span class="n">3.4</span>Simulation</p><p class="lead" style="margin:0">Drag sideways: the image inverts every 31.5 mm.</p>
+    <p class="q" style="margin:0">Ray-traced view from the design viewpoint (eye height 1600 mm, 3 m behind Chair A). Neither plate shows the image on its own.</p>
+    <div class="ctl"><span class="lab">Pattern</span><div class="seg" id="segImg">
+      <button data-v="5" aria-pressed="false">Hexagonal ripple</button><button data-v="6" aria-pressed="true">Cubes</button><button data-v="3" aria-pressed="false">MOORE</button></div></div>
+    <div class="ctl"><span class="lab">Periods</span><div class="seg" id="segPer">
+      <button data-v="0" aria-pressed="false">25 / 41.7</button><button data-v="1" aria-pressed="true">12.6 / 21</button><button data-v="2" aria-pressed="false">8.4 / 14</button></div></div>
+    <div class="ctl"><span class="lab">Layout</span><div class="seg" id="segGap">
+      <button data-v="2000" aria-pressed="true">(c) d = 2000</button><button data-v="150" aria-pressed="false">(a) d = 150</button></div></div>
+    <div class="ctl"><span class="lab">Movement</span><div class="seg" id="segMode">
+      <button data-v="still" aria-pressed="false">Stand</button><button data-v="sway" aria-pressed="false">Sway ±40 mm</button><button data-v="slow" aria-pressed="true">Slow walk</button></div></div>
+    <dl class="read">
+      <div><dt>Lateral position</dt><dd id="rOff"></dd></div>
+      <div><dt>Inversion step Δ<i>x</i></dt><dd id="rCyc"></dd></div>
+      <div><dt>Image phase</dt><dd id="rPh"></dd></div>
+      <div><dt>Both eyes</dt><dd id="rBino"></dd></div>
+    </dl>
+    <p class="note" style="margin-top:2px">Switching to layout (a) keeps the same image but the observer must move about 8× farther before it inverts, and the two eyes see different phases. The pattern colours follow the built scheme: dark rear face of Chair A, red front face of Chair B.</p>
+  </div>
+</section>
+
+</div></div>
+
+<script>
+(() => {
+  const MOORE = [[[[20.0,108.0],[20.0,10.0],[54.0,10.0],[108.0,66.8],[162.0,10.0],[196.0,10.0],[196.0,108.0],[170.0,108.0],[170.0,43.3],[108.0,96.8],[46.0,43.3],[46.0,108.0],[20.0,108.0]]],[[[196.0,176.4],[195.5,171.6],[194.1,166.9],[188.9,157.7],[180.6,149.3],[169.5,141.9],[156.9,136.3],[141.7,131.7],[125.2,128.9],[108.0,128.0],[90.8,128.9],[74.3,131.7],[59.1,136.3],[45.8,142.4],[34.8,149.8],[26.7,158.2],[21.7,167.4],[20.4,172.2],[20.0,177.0],[20.4,181.8],[21.7,186.6],[26.7,195.8],[34.8,204.2],[45.8,211.6],[59.1,217.7],[74.3,222.3],[90.8,225.1],[108.0,226.0],[125.2,225.1],[141.7,222.3],[156.9,217.7],[170.2,211.6],[181.2,204.2],[189.3,195.8],[194.3,186.6],[195.7,181.2],[196.0,176.4]],[[170.0,177.4],[168.7,183.8],[165.0,190.0],[159.1,195.7],[151.3,200.6],[142.4,204.4],[131.7,207.5],[120.1,209.4],[108.0,210.0],[95.9,209.4],[84.3,207.5],[73.6,204.4],[64.2,200.3],[56.4,195.3],[50.7,189.6],[47.2,183.4],[46.0,177.0],[47.2,170.6],[50.7,164.4],[56.4,158.7],[64.2,153.7],[73.6,149.6],[84.3,146.5],[95.9,144.6],[108.0,144.0],[120.1,144.6],[131.7,146.5],[142.4,149.6],[152.4,154.0],[160.0,159.0],[165.6,164.7],[169.0,171.0],[170.0,177.4]]],[[[196.0,294.4],[195.5,289.6],[194.1,284.9],[188.9,275.7],[180.6,267.3],[169.5,259.9],[156.9,254.3],[141.7,249.7],[125.2,246.9],[108.0,246.0],[90.8,246.9],[74.3,249.7],[59.1,254.3],[45.8,260.4],[34.8,267.8],[26.7,276.2],[21.7,285.4],[20.4,290.2],[20.0,295.0],[20.4,299.8],[21.7,304.6],[26.7,313.8],[34.8,322.2],[45.8,329.6],[59.1,335.7],[74.3,340.3],[90.8,343.1],[108.0,344.0],[125.2,343.1],[141.7,340.3],[156.9,335.7],[170.2,329.6],[181.2,322.2],[189.3,313.8],[194.3,304.6],[195.7,299.2],[196.0,294.4]],[[170.0,295.4],[168.7,301.8],[165.0,308.0],[159.1,313.7],[151.3,318.6],[142.4,322.4],[131.7,325.5],[120.1,327.4],[108.0,328.0],[95.9,327.4],[84.3,325.5],[73.6,322.4],[64.2,318.3],[56.4,313.3],[50.7,307.6],[47.2,301.4],[46.0,295.0],[47.2,288.6],[50.7,282.4],[56.4,276.7],[64.2,271.7],[73.6,267.6],[84.3,264.5],[95.9,262.6],[108.0,262.0],[120.1,262.6],[131.7,264.5],[142.4,267.6],[152.4,272.0],[160.0,277.0],[165.6,282.7],[169.0,289.0],[170.0,295.4]]],[[[160.0,462.0],[196.0,462.0],[144.4,420.8],[163.0,420.8],[170.3,419.5],[174.6,417.7],[178.9,415.0],[182.6,411.5],[185.5,407.8],[188.0,402.9],[189.5,398.0],[190.0,392.4],[189.5,386.9],[187.8,381.5],[185.5,377.0],[182.0,372.7],[177.8,369.1],[170.3,365.4],[162.5,364.0],[20.0,364.0],[20.0,462.0],[46.0,462.0],[46.0,420.8],[109.9,420.8],[160.0,462.0]],[[161.7,380.0],[163.3,381.0],[164.7,383.6],[166.0,392.0],[164.9,400.8],[163.5,403.6],[161.9,404.8],[46.0,404.8],[46.0,380.0],[161.7,380.0]]],[[[196.0,482.0],[20.0,482.0],[20.0,580.0],[196.0,580.0],[196.0,564.0],[46.0,564.0],[46.0,539.0],[174.0,539.0],[174.0,523.0],[46.0,523.0],[46.0,498.0],[196.0,498.0],[196.0,482.0]]]];
+  const $ = id => document.getElementById(id);
+  // ---------- fit the fixed sheet into the window ----------
+  const fit = () => { const s = Math.min(innerWidth / 1920, innerHeight / 1080); const f = $('fit'); f.style.transform = `scale(${s})`;
+    f.style.left = `${(innerWidth - 1920 * s) / 2}px`; f.style.top = `${(innerHeight - 1080 * s) / 2}px`; };
+  addEventListener('resize', fit); fit();
+
+  // ---------- 3.1 thumbnails (per-pixel products of two transmittance functions) ----------
+  function thumb(id, f) {
+    const c = $(id), g = c.getContext('2d'), W = c.width, H = c.height, im = g.createImageData(W, H);
+    for (let y = 0; y < H; y++) for (let x = 0; x < W; x++) {
+      const v = f(x, y, W, H), i = (y * W + x) * 4;
+      im.data[i] = im.data[i + 1] = im.data[i + 2] = v ? 255 : 30; im.data[i + 3] = 255;
+    }
+    g.putImageData(im, 0, 0);
+  }
+  const sq = (v, p) => ((v % p) + p) % p < p / 2;
+  thumb('t0', (x, y) => sq(x, 9) && sq(x * Math.cos(0.08) + y * Math.sin(0.08), 9.6));
+  thumb('t1', (x, y) => { const d1 = Math.hypot(((x % 10) + 10) % 10 - 5, ((y % 10) + 10) % 10 - 5) > 2.2;
+    const d2 = Math.hypot(((x % 10.6) + 10.6) % 10.6 - 5.3, ((y % 10.6) + 10.6) % 10.6 - 5.3) > 2.2; return d1 && d2; });
+  thumb('t2', (x, y, W, H) => { const n = 4, p = 12, k = Math.floor((((x % p) + p) % p) / (p / n));
+    const frame = Math.hypot(x - W / 2 - (k - 1.5) * 14, y - H / 2) < 30; return (((x % p) + p) % p) < p / n && frame; });
+  thumb('t3', (x, y, W, H) => { const ph = Math.hypot(x - W / 2, y - H / 2) < 42 ? 0.5 : 0; return sq(x, 10) && (((x / 10 - ph) % 1 + 1) % 1) < 0.5; });
+  $('t3').getContext('2d');
+
+  // ---------- 3.2 plan schematics ----------
+  const NS = 'http://www.w3.org/2000/svg';
+  function svg(id, items) { const s = $(id); for (const [tag, at] of items) { const e = document.createElementNS(NS, tag); for (const k in at) e.setAttribute(k, at[k]); s.appendChild(e); } }
+  const eye = (x, y) => ['circle', { cx: x, cy: y, r: 4.5, fill: '#1E1E1E' }];
+  const ln = (x1, y1, x2, y2, c = '#1E1E1E', w = 0.8, d = '') => ['line', { x1, y1, x2, y2, stroke: c, 'stroke-width': w, 'stroke-dasharray': d }];
+  const plate = (x, y1, y2, c) => ln(x, y1, x, y2, c, 4);
+  const seat = (x, y, w, h) => ['rect', { x, y, width: w, height: h, fill: 'none', stroke: '#8C8C8C', 'stroke-width': 0.8, 'stroke-dasharray': '3 2' }];
+  svg('L0', [seat(60, 40, 22, 38), plate(84, 40, 78, '#555'), plate(92, 40, 78, '#D9532B'), ln(168, 92, 20, 56, '#1E1E1E', 0.7), eye(168, 92)]);
+  svg('L1', [seat(22, 18, 22, 38), plate(20, 18, 37, '#D9532B'), plate(20, 37, 56, '#555'), seat(98, 58, 22, 38), plate(122, 58, 77, '#555'), plate(122, 77, 96, '#D9532B'),
+    ln(170, 104, 20, 30, '#1E1E1E', 0.7), eye(170, 104), ln(14, 6, 164, 88, '#8C8C8C', 0.7, '3 2')]);
+  svg('L2', [seat(22, 14, 22, 38), plate(20, 14, 52, '#D9532B'), seat(98, 58, 22, 38), plate(122, 58, 96, '#555'), ln(170, 104, 20, 33, '#1E1E1E', 0.7), eye(170, 104),
+    ln(66, 4, 66, 112, '#BDBDBD', 0.6, '2 2'), ['text', { x: 70, y: 112, 'font-size': 9, fill: '#8C8C8C', 'font-family': 'Times New Roman, serif' }]]);
+  $('L2').lastChild.textContent = 'd = 2000';
+
+  // ---------- simulation (adapted from the final two-chair demo) ----------
+  const E0 = 1600, XV0 = -900;
+  const WA = [-108, 108, 940, 1530], WB = [-180, 180, 500, 1500];
+  const PERS = [25, 12.6, 8.4];
+  const st = { img: 6, per: 1, d: 2000, off: 0, mode: 'slow' };
+  let PA = 12.6, PB = 21, raf = 0;
+  const MW = 216, MH = 590, SC = 2;
+  const sharp = document.createElement('canvas'); sharp.width = MW * SC; sharp.height = MH * SC;
+  const soft = document.createElement('canvas'); soft.width = sharp.width; soft.height = sharp.height;
+  function tess(g, kind, w) {
+    const gray = v => { const c = Math.round((((v % 1) + 1) % 1) * 255); return `rgb(${c},${c},${c})`; };
+    const poly = pts => { g.beginPath(); g.moveTo(...pts[0]); for (const q of pts.slice(1)) g.lineTo(...q); g.closePath(); g.fill(); };
+    const s = w / Math.sqrt(3), hs = 1.5 * s;
+    for (let r = -1; r * hs < MH + s; r++) for (let c = -1; c * w < MW + w; c++) {
+      const cx = c * w + (r & 1 ? w / 2 : 0), cy = r * hs;
+      const P = [0, 1, 2, 3, 4, 5].map(i => { const a = Math.PI / 180 * (60 * i - 30); return [cx + s * Math.cos(a), cy + s * Math.sin(a)]; });
+      if (kind === 6) [[[cx, cy], P[4], P[5], P[0]], [[cx, cy], P[0], P[1], P[2]], [[cx, cy], P[2], P[3], P[4]]].forEach((q, i) => { g.fillStyle = gray(i / 3); poly(q); });
+      else { g.fillStyle = gray(Math.hypot(cx - MW / 2, cy - MH / 2) / (2.6 * w)); poly(P); }
+    }
+  }
+  function buildMask() {
+    const g = sharp.getContext('2d');
+    g.setTransform(1, 0, 0, 1, 0, 0); g.fillStyle = '#000'; g.fillRect(0, 0, sharp.width, sharp.height);
+    g.setTransform(SC, 0, 0, SC, 0, 0);
+    if (st.img === 3) {
+      g.fillStyle = 'rgb(128,128,128)'; g.beginPath();
+      for (const rings of MOORE) for (const r of rings) { g.moveTo(...r[0]); for (const q of r.slice(1)) g.lineTo(...q); g.closePath(); }
+      g.fill('evenodd');
+    } else tess(g, st.img, st.img === 5 ? 70 : 100);
+    const s = soft.getContext('2d');
+    s.setTransform(1, 0, 0, 1, 0, 0); s.fillStyle = '#000'; s.fillRect(0, 0, soft.width, soft.height);
+    s.filter = `blur(${(0.35 * PA * SC).toFixed(1)}px)`; s.drawImage(sharp, 0, 0); s.filter = 'none';
+  }
+  const VS = 'attribute vec2 p; void main(){ gl_Position = vec4(p, 0.0, 1.0); }';
+  const FS = `
+#ifdef GL_FRAGMENT_PRECISION_HIGH
+precision highp float;
+#else
+precision mediump float;
+#endif
+uniform vec2 uRes; uniform float uMode, DD, K0;
+uniform vec3 uEye, uFwd, uRight, uUp; uniform float uTanF;
+uniform float PA, PB; uniform sampler2D uMask;
+uniform vec3 uNear, uFar, uGround, uSky, uRod, uPage;
+uniform float S; const float E0 = ${E0.toFixed(1)}; const float XV0 = ${XV0.toFixed(1)};
+const vec4 WA = vec4(${WA.map(v => v.toFixed(1)).join(',')});
+bool bridge(float h){ return mod(h, 120.0) < 4.0; }
+float hash(float n){ return fract(sin(n * 12.9898) * 43758.5453); }
+float maskAt(vec2 b){
+  float xb = S - b.x;
+  float xa = XV0 + (xb - XV0) / K0;
+  float ha = E0 + (b.y - E0) / K0;
+  vec2 uv = vec2((xa - WA.x) / (WA.y - WA.x), (ha - WA.z) / (WA.w - WA.z));
+  if (uv.x < 0.0 || uv.x > 1.0 || uv.y < 0.0 || uv.y > 1.0) return 0.0;
+  return texture2D(uMask, uv).r;
+}
+float openA(vec2 q){
+  if (abs(q.x) > 250.0 || q.y < 0.0 || q.y > 1600.0) return -1.0;
+  float fx = q.x / PA;
+  if (fract(fx) >= 0.5) return 0.0;
+  float col = floor(fx), cx = (col + 0.25) * PA, t = cx / 182.0;
+  if (abs(t) >= 1.0) return 0.0;
+  float e = sqrt(1.0 - t * t);
+  float top = min(1565.0, 1235.0 + 340.0 * e * (0.84 + 0.22 * hash(col + 3.1)));
+  float bot = max(860.0, 1235.0 - 350.0 * e * (0.84 + 0.24 * hash(col + 7.7)));
+  if (q.y > top || q.y < bot) return 0.0;
+  if (abs(t) > 0.62 && hash(col + 11.3) > 0.55) {
+    float cut = mix(bot, top, 0.3 + 0.4 * hash(col + 5.9));
+    if (abs(q.y - cut) < 10.0 + 25.0 * hash(col + 2.2)) return 0.0;
+  }
+  return bridge(q.y) ? 0.0 : 1.0;
+}
+float openB(vec2 q){
+  if (abs(q.x) > 250.0 || q.y < 0.0 || q.y > 1600.0) return -1.0;
+  float sc = K0 / ${(5000 / 3000).toFixed(6)};
+  vec2 qq = vec2(q.x, E0 + (q.y - E0) / sc);
+  float fx = q.x / PB;
+  if (fract(fx - maskAt(q)) >= 0.5) return 0.0;
+  float col = floor(fx), cx = (col + 0.25) * PB, t = abs(cx) / (183.0 * sc);
+  if (t >= 1.0) return 0.0;
+  float corner = 70.0 * sc * pow(max(t - 0.62, 0.0) / 0.38, 2.0);
+  float top = E0 + (min(1560.0, 1500.0 + 50.0 * hash(col + 21.7) * (1.0 - t) - corner) - E0) * sc;
+  float bot = E0 + (max(450.0, 500.0 - 45.0 * hash(col + 13.1) * (1.0 - t) + corner) - E0) * sc;
+  if (q.y > top || q.y < bot) return 0.0;
+  return bridge(q.y) ? 0.0 : 1.0;
+}
+bool rod(vec2 q){ return q.y > 500.0 && q.y < 1400.0 && abs(abs(q.x) - 220.0) < 16.85; }
+vec3 trace(vec3 ro, vec3 rd){
+  float tg = rd.y < 0.0 ? -ro.y / rd.y : 1e9;
+  float t1 = -ro.z / rd.z;
+  if (tg < t1) return uGround;
+  vec3 p = ro + rd * t1;
+  if (rod(p.xy)) return uRod;
+  if (openA(p.xy) == 0.0) return uNear;
+  float t2 = (DD - ro.z) / rd.z;
+  if (tg < t2) return uGround;
+  p = ro + rd * t2;
+  if (openB(vec2(S - p.x, p.y)) == 0.0) return uFar;
+  return rd.y < 0.0 ? uGround : uSky;
+}
+void main(){
+  vec3 acc = vec3(0.0);
+  for (int i = 0; i < 3; i++) for (int j = 0; j < 3; j++) {
+    if (uMode < 0.5) {
+      vec2 f = (gl_FragCoord.xy + (vec2(float(i), float(j)) + 0.5) / 3.0 - 0.5) / uRes * 2.0 - 1.0;
+      vec3 rd = normalize(uFwd + f.x * uTanF * (uRes.x / uRes.y) * uRight + f.y * uTanF * uUp);
+      acc += trace(uEye, rd);
+    } else {
+      vec2 f = (gl_FragCoord.xy + (vec2(float(i), float(j)) + 0.5) / 3.0 - 0.5) / uRes;
+      vec2 q = vec2((f.x - 0.5) * 520.0, f.y * 1580.0);
+      float o = uMode < 1.5 ? openA(q) : openB(vec2(-q.x, q.y));
+      acc += o != 0.0 ? uPage : (uMode < 1.5 ? uNear : uFar);
+    }
+  }
+  gl_FragColor = vec4(acc / 9.0, 1.0);
+}`;
+  function makeGL(canvas) {
+    const gl = canvas.getContext('webgl', { antialias: false, preserveDrawingBuffer: true });
+    if (!gl) return null;
+    const sh = (t, s) => { const o = gl.createShader(t); gl.shaderSource(o, s); gl.compileShader(o);
+      if (!gl.getShaderParameter(o, gl.COMPILE_STATUS)) throw new Error(gl.getShaderInfoLog(o)); return o; };
+    const pr = gl.createProgram();
+    gl.attachShader(pr, sh(gl.VERTEX_SHADER, VS)); gl.attachShader(pr, sh(gl.FRAGMENT_SHADER, FS)); gl.linkProgram(pr);
+    if (!gl.getProgramParameter(pr, gl.LINK_STATUS)) throw new Error(gl.getProgramInfoLog(pr));
+    gl.useProgram(pr);
+    const b = gl.createBuffer(); gl.bindBuffer(gl.ARRAY_BUFFER, b);
+    gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1, -1, 1, -1, -1, 1, 1, 1]), gl.STATIC_DRAW);
+    const loc = gl.getAttribLocation(pr, 'p'); gl.enableVertexAttribArray(loc); gl.vertexAttribPointer(loc, 2, gl.FLOAT, false, 0, 0);
+    const U = {}; const n = gl.getProgramParameter(pr, gl.ACTIVE_UNIFORMS);
+    for (let i = 0; i < n; i++) { const a = gl.getActiveUniform(pr, i); U[a.name] = gl.getUniformLocation(pr, a.name); }
+    const tex = gl.createTexture(); gl.bindTexture(gl.TEXTURE_2D, tex);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR); gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE); gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
+    gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, true);
+    return { gl, U, canvas, tex };
+  }
+  let R = [];
+  try { R = [makeGL($('view')), makeGL($('plateA')), makeGL($('plateB'))]; if (R.some(x => !x)) R = []; } catch (e) { console.error(e); R = []; }
+  if (!R.length) { const d = document.createElement('div'); d.className = 'nogl'; d.textContent = 'WebGL is not available in this browser, so the simulation cannot be shown.'; $('stage').appendChild(d); }
+  const hex = h => [1, 3, 5].map(i => parseInt(h.slice(i, i + 2), 16) / 255);
+  const C = { near: hex('#2B2B2B'), far: hex('#D9532B'), ground: hex('#4A4A4A'), sky: hex('#6E6E6E'), rod: hex('#3A3A3A'), page: hex('#FFFFFF') };
+  function upload() { for (const r of R) { r.gl.bindTexture(r.gl.TEXTURE_2D, r.tex); r.gl.texImage2D(r.gl.TEXTURE_2D, 0, r.gl.LUMINANCE, r.gl.LUMINANCE, r.gl.UNSIGNED_BYTE, soft); } }
+  function common(r) {
+    const { gl, U } = r;
+    gl.uniform1f(U.PA, PA); gl.uniform1f(U.PB, PB); gl.uniform1f(U.DD, st.d); gl.uniform1f(U.S, 0.3 * st.d); gl.uniform1f(U.K0, (3000 + st.d) / 3000); gl.uniform1i(U.uMask, 0);
+    gl.uniform3f(U.uNear, ...C.near); gl.uniform3f(U.uFar, ...C.far); gl.uniform3f(U.uGround, ...C.ground);
+    gl.uniform3f(U.uSky, ...C.sky); gl.uniform3f(U.uRod, ...C.rod); gl.uniform3f(U.uPage, ...C.page);
+  }
+  function drawView() {
+    const r = R[0]; if (!r) return; const { gl, U, canvas } = r;
+    gl.viewport(0, 0, canvas.width, canvas.height); common(r);
+    const e = { x: XV0 + st.off, y: E0, z: -3000 };
+    const tgt = [0, 0.5 * (WA[2] + WA[3]), 0], fov = 14;
+    let f = [tgt[0] - e.x, tgt[1] - e.y, tgt[2] - e.z]; const fl = Math.hypot(...f); f = f.map(v => v / fl);
+    let rr = [f[2], 0, -f[0]]; const rl = Math.hypot(...rr); rr = rr.map(v => v / rl);
+    const u = [f[1] * rr[2] - f[2] * rr[1], f[2] * rr[0] - f[0] * rr[2], f[0] * rr[1] - f[1] * rr[0]];
+    gl.uniform1f(U.uMode, 0); gl.uniform2f(U.uRes, canvas.width, canvas.height);
+    gl.uniform3f(U.uEye, e.x, e.y, e.z); gl.uniform3f(U.uFwd, ...f); gl.uniform3f(U.uRight, ...rr); gl.uniform3f(U.uUp, ...u);
+    gl.uniform1f(U.uTanF, Math.tan(fov * Math.PI / 360));
+    gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
+  }
+  function drawPlate(i) {
+    const r = R[i]; if (!r) return; const { gl, U, canvas } = r;
+    gl.viewport(0, 0, canvas.width, canvas.height); common(r);
+    gl.uniform1f(U.uMode, i); gl.uniform2f(U.uRes, canvas.width, canvas.height);
+    gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
+  }
+  const fmt = (n, d = 0) => n.toLocaleString('en-GB', { minimumFractionDigits: d, maximumFractionDigits: d });
+  function readouts() {
+    const cyc = PB * 3000 / st.d;
+    $('rOff').innerHTML = `${st.off > 0 ? '+' : ''}${fmt(st.off)}<small>mm</small>`;
+    $('rCyc').innerHTML = `${fmt(cyc, cyc < 100 ? 1 : 0)}<small>mm</small>`;
+    const ph = ((st.off / cyc) % 1 + 1) % 1;
+    $('rPh').innerHTML = `${fmt(ph * 360)}°<small>${Math.abs(ph - 0.5) < 0.25 ? 'inverted' : 'positive'}</small>`;
+    const fr = (63 / cyc) % 1, bd = Math.min(fr, 1 - fr);
+    $('rBino').innerHTML = bd < 0.1 ? `in phase<small>63 / Δx = ${fmt(63 / cyc, 2)}</small>` : `<span style="color:#D9532B">${fmt(bd * 360)}° apart</span><small>blurred</small>`;
+  }
+  function render() { drawView(); drawPlate(1); drawPlate(2); readouts(); }
+  function rebuild() { PA = PERS[st.per]; PB = PA * (3000 + st.d) / 3000; buildMask(); upload(); render(); }
+
+  function seg(id, key, num, after) {
+    $(id).querySelectorAll('button').forEach(b => b.addEventListener('click', () => {
+      $(id).querySelectorAll('button').forEach(x => x.setAttribute('aria-pressed', x === b));
+      st[key] = num ? +b.dataset.v : b.dataset.v; after();
+    }));
+  }
+  seg('segImg', 'img', true, rebuild); seg('segPer', 'per', true, rebuild); seg('segGap', 'd', true, rebuild);
+  seg('segMode', 'mode', false, () => setMode(st.mode));
+  function setMode(m) {
+    cancelAnimationFrame(raf);
+    if (m === 'still') { render(); return; }
+    const t0 = performance.now(), base = st.off;
+    let last = 0;
+    const step = now => {
+      if (now - last < 33) { raf = requestAnimationFrame(step); return; } last = now;
+      const t = (now - t0) / 1000;
+      st.off = m === 'sway' ? base + 40 * Math.sin(2 * Math.PI * 0.35 * t) : base + 150 * Math.sin(2 * Math.PI * t / 20);
+      st.off = Math.max(-400, Math.min(400, st.off)); render(); raf = requestAnimationFrame(step);
+    };
+    raf = requestAnimationFrame(step);
+  }
+  const cv = $('view'); let drag = false, x0 = 0, o0 = 0;
+  const stopAnim = () => { if (st.mode !== 'still') { st.mode = 'still'; cancelAnimationFrame(raf);
+    $('segMode').querySelectorAll('button').forEach(x => x.setAttribute('aria-pressed', x.dataset.v === 'still')); } };
+  cv.addEventListener('pointerdown', e => { stopAnim(); drag = true; x0 = e.clientX; o0 = st.off; cv.setPointerCapture(e.pointerId); });
+  cv.addEventListener('pointermove', e => { if (!drag) return; const s = 1920 / $('fit').getBoundingClientRect().width;
+    st.off = Math.max(-400, Math.min(400, o0 + (e.clientX - x0) * s * 0.25)); render(); });
+  cv.addEventListener('pointerup', () => { drag = false; }); cv.addEventListener('pointercancel', () => { drag = false; });
+  rebuild();
+  // run the walk only while this chapter is on screen (the parent page says 'in' / 'out')
+  if (window === window.parent) setMode('slow');
+  addEventListener('message', e => { if (e.data === 'out') cancelAnimationFrame(raf); if (e.data === 'in' && st.mode !== 'still') setMode(st.mode); });
+})();
+</script>
+<style id="anim">
+html, body { background: #fff !important; }
+.js-anim .rule, .js-anim .col, .js-anim .text, .js-anim .figs, .js-anim .row2 { position: relative; border-top-color: transparent !important; }
+.js-anim .rule::before, .js-anim .col::before, .js-anim .text::before, .js-anim .figs::before, .js-anim .row2::before {
+  content: ""; position: absolute; left: 0; top: -1.4px; height: 1.4px; width: 100%; background: #1E1E1E;
+  transform: scaleX(0); transform-origin: 0 0; transition: transform .7s cubic-bezier(.2,.7,.2,1); }
+.js-anim.in .rule::before, .js-anim.in .col::before, .js-anim.in .text::before, .js-anim.in .figs::before, .js-anim.in .row2::before { transform: scaleX(1); }
+.js-anim [data-a] { opacity: 0; transform: translateY(12px); transition: opacity .5s ease, transform .5s ease; }
+.js-anim.in [data-a] { opacity: 1; transform: none; }
+</style>
+<script>
+(function () {
+  var root = document.documentElement;
+  if (window === window.parent) return;
+  var still = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (!still) root.classList.add('js-anim');
+  var sel = 'header > *, .label, .lead, .small, .q, .note, .formula, .decide, figure, table, .types, .lay, .stage, .plates, .ctl, .read, .grp, .step, .tag, .media';
+  var i = 0;
+  document.querySelectorAll(sel).forEach(function (el) {
+    if (el.parentElement && el.parentElement.closest('[data-a]')) return;
+    el.setAttribute('data-a', ''); el.style.transitionDelay = Math.min(i++ * 70, 1000) + 'ms';
+  });
+  document.querySelectorAll('img[data-full]').forEach(function (im) {
+    im.style.cursor = 'zoom-in';
+    im.addEventListener('click', function () { window.parent.postMessage({ lb: new URL(im.dataset.full, location.href).href, cap: im.dataset.cap || '' }, '*'); });
+  });
+  window.addEventListener('message', function (e) {
+    var vids = document.querySelectorAll('video');
+    if (e.data === 'in') { root.classList.add('in'); vids.forEach(function (v) { var p = v.play && v.play(); if (p && p.catch) p.catch(function () {}); }); }
+    if (e.data === 'out') vids.forEach(function (v) { v.pause(); });
+  });
+})();
+</script></body>
+</html>

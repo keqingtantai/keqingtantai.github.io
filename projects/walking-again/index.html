@@ -1,0 +1,202 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Walking Again — Keqing Tantai</title>
+<style>
+  :root { --ink:#1E1E1E; --g1:#555555; --g2:#8C8C8C; --g3:#BDBDBD; --g4:#E6E6E6; --acc:#2C78B4; --s:1; --serif:"Times New Roman", Times, "Liberation Serif", serif; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { background: #FFFFFF; color: var(--ink); font-family: var(--serif); }
+  a { color: inherit; }
+  .narrow { display: none; padding: 12px 16px; font-size: 14px; color: var(--g1); border-bottom: 0.6px solid var(--g4); }
+  .frame { display: block; width: 100%; aspect-ratio: 1920 / 1080; border: 0; background: #FFFFFF; }
+  .pno { height: calc(96px * var(--s)); min-height: 44px; display: flex; align-items: center; justify-content: center; font-size: 13px; letter-spacing: .12em; color: var(--g2); }
+  .bleed { display: block; width: 100%; height: auto; }
+
+  /* top bar */
+  .bar { position: fixed; left: 0; right: 0; top: 0; height: 44px; z-index: 20; background: rgba(255,255,255,.94); border-bottom: 0.6px solid #E6E6E6;
+         font-size: 14px; display: flex; align-items: center; gap: 18px; padding: 0 calc(56px * var(--s)) 0 calc(150px * var(--s));
+         transform: translateY(-100%); transition: transform .35s ease; }
+  .bar.show { transform: none; }
+  .bar .name { font-weight: 700; cursor: pointer; text-decoration: none; }
+  .bar .chap { color: var(--g1); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .bar .chap b { color: var(--acc); margin-right: .4em; }
+  .bar .back { margin-left: auto; text-decoration: none; color: var(--ink); }
+  .bar .back:hover, .bar .name:hover { color: var(--acc); }
+  .bar .prog { position: absolute; left: 0; bottom: -0.6px; height: 2px; width: 0; background: var(--acc); }
+
+  /* chapter index */
+  .idx { position: fixed; left: 0; top: 50%; transform: translateY(-50%); width: calc(150px * var(--s)); z-index: 15; list-style: none;
+         opacity: 0; pointer-events: none; transition: opacity .3s ease; }
+  .idx.show { opacity: 1; pointer-events: auto; }
+  .idx li { position: relative; display: flex; align-items: center; height: 26px; padding-left: calc(56px * var(--s)); font-size: 14px; color: var(--g2); cursor: pointer; }
+  .idx li::before { content: ""; width: 10px; height: 0.8px; background: var(--g3); margin-right: 8px; transition: width .25s ease, background .25s ease; }
+  .idx li.cur { color: var(--acc); font-weight: 700; }
+  .idx li.cur::before { width: 22px; background: var(--acc); }
+  .idx li .tip { position: absolute; left: calc(100% - 8px); white-space: nowrap; background: #FFFFFF; border: 0.6px solid var(--g3); padding: 2px 8px; font-weight: 400; color: var(--ink); display: none; }
+  .idx li:hover .tip { display: block; }
+
+  /* lightbox */
+  .lb { position: fixed; inset: 0; z-index: 50; background: rgba(15,15,15,.86); display: none; align-items: center; justify-content: center; cursor: zoom-out; }
+  .lb.show { display: flex; }
+  .lb img { max-width: 94vw; max-height: 92vh; object-fit: contain; background: #FFFFFF; }
+
+  /* end page */
+  .end { border-top: 1.4px solid #1E1E1E; margin: calc(40px * var(--s)) calc(56px * var(--s)) 0 calc(150px * var(--s)); padding: 28px 0 60px; }
+  .end .cols { display: grid; grid-template-columns: 1.4fr 1fr 1fr; gap: 48px; }
+  .end h4 { font-size: 14px; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; color: var(--g2); margin-bottom: 10px; }
+  .end p, .end li { font-size: 14px; line-height: 1.5; color: var(--g1); }
+  .end ol { padding-left: 18px; }
+  .end .links { margin-top: 36px; display: flex; gap: 32px; font-size: 14px; }
+  .end .links a { text-decoration: none; }
+  .end .links a:hover { color: var(--acc); }
+
+  @media (max-width: 899px) {
+    .narrow { display: block; }
+    .idx { display: none; }
+    .end .cols { grid-template-columns: 1fr; gap: 28px; }
+  }
+</style>
+</head>
+<body>
+<div class="narrow">This project is laid out for a wide screen; it reads best on a computer.</div>
+
+<header class="bar" id="bar">
+  <a class="name" id="toTop">Walking Again</a>
+  <span class="chap" id="chap"></span>
+  <a class="back" href="../../index.html#product">← Portfolio</a>
+  <div class="prog" id="prog"></div>
+</header>
+<ul class="idx" id="idx"></ul>
+<div class="lb" id="lb"><img alt=""></div>
+
+<main id="main"></main>
+
+<footer class="end" id="end">
+  <div class="cols">
+    <div>
+      <h4>References</h4>
+      <ol>
+        <li>Xinhua (2024). Ministry of Transport briefing at the State Council Information Office, 27 September 2024: over 12 million shared bikes in service.</li>
+        <li>CCTV News (2023). Fine dismantling and recycling: how are scrapped shared bikes turned into resources? 14 August 2023.</li>
+        <li>National Bureau of Statistics of China (2026). Statistical Communiqué on the 2025 National Economic and Social Development.</li>
+        <li>Jiankangbao (2024). Falls: a life-threatening crisis for older people. 8 January 2024 (China CDC surveillance data).</li>
+        <li>Liu, X., Baumann, S. E., Rosso, A. L., Venditti, E. M., Yao, Y. and Albert, S. M. (2026). Mobility device use among community-dwelling older adults: a mixed-methods comparison of the U.S. and China. Gerontechnology, 25(s).</li>
+        <li>International Aluminium Institute (2024). Global aluminium industry greenhouse gas emissions intensity, 2023 data.</li>
+        <li>International Aluminium Institute (2024). Factsheet: GHG saving from aluminium recycling.</li>
+        <li>World Steel Association (2023). Sustainability Indicators 2023 report.</li>
+        <li>PlasticsEurope (2005). Eco-profiles of the European plastics industry: polypropylene.</li>
+        <li>Plastics Recyclers Europe (2025). EcoProfiles of recycled plastics v1.0: recycled PP pellets.</li>
+        <li>Euromoulders (2021). Eco-profile of moulded polyurethane foam.</li>
+        <li>Ministry of Ecology and Environment of China (2026). National average CO₂ emission factor of electricity, 2023.</li>
+        <li>ISO 11199-2:2005. Walking aids manipulated by both arms — Requirements and test methods — Part 2: Rollators.</li>
+      </ol>
+    </div>
+    <div>
+      <h4>Tools</h4>
+      <p>Rhino 8 · KeyShot 2024<br>Python: build123d, trimesh, NumPy<br>Beam finite-element model written for this project<br>three.js line renderer</p>
+    </div>
+    <div>
+      <h4>Credits</h4>
+      <p>Design, modelling, analysis and rendering: Keqing Tantai<br>Base geometry: Hellobike shared bike</p>
+    </div>
+  </div>
+  <div class="links"><a href="#" id="backTop">↑ Back to the top</a><a href="../../index.html#product">← Portfolio</a></div>
+</footer>
+
+<script>
+(function () {
+  // 页面清单：kind=page 为 1920×1080 子页面；kind=bleed 为通栏大图
+  var ITEMS = [
+    { kind: 'page', src: 'pages/p01.html', title: 'Cover' },
+    { kind: 'page', src: 'pages/p02.html', no: '01', title: 'Overview' },
+    { kind: 'bleed', src: 'assets/render-side.jpg', alt: 'Walking Again, side view render' },
+    { kind: 'page', src: 'pages/p03.html', no: '02', title: 'Context' },
+    { kind: 'page', src: 'pages/p04.html', no: '03', title: 'Concept' },
+    { kind: 'page', src: 'pages/p05.html', no: '04', title: 'Form and Dimensions' },
+    { kind: 'page', src: 'pages/p06.html', no: '05', title: 'Structure and Joints' },
+    { kind: 'page', src: 'pages/p07.html', no: '06', title: 'Strength' },
+    { kind: 'page', src: 'pages/p08.html', no: '07', title: 'Stability' },
+    { kind: 'page', src: 'pages/p09.html', no: '08', title: 'Reused, Not Remelted' },
+    { kind: 'page', src: 'pages/p10.html', no: '09', title: 'Build It from Your Bike' },
+    { kind: 'page', src: 'pages/p11.html', no: '10', title: 'Use' },
+    { kind: 'bleed', src: 'assets/render-rear-three-quarter.jpg', alt: 'Walking Again, rear three-quarter render' }
+  ];
+  var main = document.getElementById('main'), frames = [], bleeds = [], pageNo = 0;
+  ITEMS.forEach(function (it, i) {
+    if (it.kind === 'page') {
+      var prev = ITEMS[i - 1];
+      if (i > 0 && prev.kind === 'page') { var pn = document.createElement('div'); pn.className = 'pno'; pn.textContent = String(pageNo).padStart(2, '0'); main.appendChild(pn); }
+      pageNo++;
+      var f = document.createElement('iframe'); f.className = 'frame'; f.src = it.src; f.title = it.title;
+      if (i > 0) f.loading = 'lazy';
+      f.dataset.no = it.no || ''; f.dataset.title = it.title;
+      main.appendChild(f); frames.push(f);
+    } else {
+      var im = document.createElement('img'); im.className = 'bleed'; im.src = it.src; im.alt = it.alt; im.loading = 'lazy';
+      main.appendChild(im); bleeds.push(im);
+    }
+  });
+
+  function setScale() { document.documentElement.style.setProperty('--s', window.innerWidth / 1920); }
+  setScale(); window.addEventListener('resize', setScale);
+
+  // 章节索引
+  var idx = document.getElementById('idx');
+  frames.forEach(function (f) {
+    if (!f.dataset.no) return;
+    var li = document.createElement('li'); li.innerHTML = f.dataset.no + '<span class="tip">' + f.dataset.title + '</span>';
+    li.addEventListener('click', function () { window.scrollTo({ top: f.getBoundingClientRect().top + window.scrollY - 44, behavior: 'smooth' }); });
+    f._li = li; idx.appendChild(li);
+  });
+
+  // 外壳 ↔ 子页面通信
+  var ratio = new Map();
+  var io = new IntersectionObserver(function (es) {
+    es.forEach(function (e) {
+      var f = e.target; ratio.set(f, e.intersectionRatio);
+      if (e.intersectionRatio >= 0.3 && !f._in) { f._in = true; post(f, 'in'); }
+      else if (!e.isIntersecting && f._in) { f._in = false; post(f, 'out'); }
+    });
+  }, { threshold: [0, 0.3, 0.6, 1] });
+  function post(f, m) { try { f.contentWindow && f.contentWindow.postMessage(m, '*'); } catch (err) {} }
+  frames.forEach(function (f) {
+    io.observe(f);
+    f.addEventListener('load', function () { if ((ratio.get(f) || 0) >= 0.3) { f._in = true; post(f, 'in'); } });
+  });
+
+  // 通栏大图在视野中时隐藏索引
+  var bleedVis = new Set();
+  var io2 = new IntersectionObserver(function (es) { es.forEach(function (e) { if (e.intersectionRatio > 0.5) bleedVis.add(e.target); else bleedVis.delete(e.target); }); update(); }, { threshold: [0, 0.5, 1] });
+  bleeds.forEach(function (b) { io2.observe(b); });
+
+  var bar = document.getElementById('bar'), chap = document.getElementById('chap'), prog = document.getElementById('prog');
+  function update() {
+    var y = window.scrollY, H = document.documentElement.scrollHeight - window.innerHeight;
+    var coverH = frames[0].getBoundingClientRect().height;
+    var show = y > coverH * 0.6;
+    bar.classList.toggle('show', show);
+    var ir = idx.getBoundingClientRect(), overBleed = bleeds.some(function (b) { var r = b.getBoundingClientRect(); return r.top < ir.bottom && r.bottom > ir.top; });
+    idx.classList.toggle('show', show && !overBleed);
+    prog.style.width = (H > 0 ? Math.min(100, y / H * 100) : 0) + '%';
+    var mid = window.innerHeight / 2, cur = null;
+    frames.forEach(function (f) { if (!f.dataset.no) return; var r = f.getBoundingClientRect(); if (r.top <= mid) cur = f; });
+    frames.forEach(function (f) { if (f._li) f._li.classList.toggle('cur', f === cur); });
+    chap.innerHTML = cur ? '<b>' + cur.dataset.no + '</b>' + cur.dataset.title : '';
+  }
+  window.addEventListener('scroll', update, { passive: true }); window.addEventListener('resize', update); update();
+
+  function top(e) { if (e) e.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }); }
+  document.getElementById('toTop').addEventListener('click', top);
+  document.getElementById('backTop').addEventListener('click', top);
+
+  // 灯箱
+  var lb = document.getElementById('lb'), lbi = lb.querySelector('img');
+  window.addEventListener('message', function (e) { if (e.data && e.data.lb) { lbi.src = e.data.lb; lb.classList.add('show'); } });
+  lb.addEventListener('click', function () { lb.classList.remove('show'); });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape') lb.classList.remove('show'); });
+})();
+</script>
+</body>
+</html>

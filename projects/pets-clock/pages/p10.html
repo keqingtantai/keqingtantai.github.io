@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>9. Inside: How It Runs</title><style>
+:root { --ink: #1E1E1E; --g1: #555555; --g2: #8C8C8C; --g3: #BDBDBD; --g4: #E6E6E6; --red: #D9532B;
+  --serif: "Times New Roman", Times, "Liberation Serif", serif;
+  --t-title: 30px; --t-lede: 16px; --t-label: 14px; --t-lead: 22px; --t-body: 14px; --t-data: 13px; --t-cap: 12px; }
+* { box-sizing: border-box; }
+html, body { margin: 0; height: 100%; background: #F2F2F2; overflow: hidden; }
+body { font-family: var(--serif); color: var(--ink); }
+#fit { position: absolute; left: 0; top: 0; transform-origin: 0 0; }
+.sheet { width: 1920px; height: 1080px; background: #fff; padding: 150px 56px 30px 150px; display: grid; grid-template-rows: auto 1fr; row-gap: 18px; }
+h1 { margin: 0; font-size: var(--t-title); font-weight: bold; }
+.lede { margin: 6px 0 0; font-size: var(--t-lede); color: var(--g1); }
+.rule { border-top: 1.4px solid var(--ink); padding-top: 14px; min-height: 0; }
+figure { margin: 0; }
+figure img, figure video { display: block; width: 100%; }
+figcaption { font-size: var(--t-cap); color: var(--g1); margin-top: 5px; line-height: 1.35; }
+figcaption b { color: var(--ink); }
+.label { margin: 0 0 8px; font-size: var(--t-label); font-weight: bold; letter-spacing: 0.06em; text-transform: uppercase; color: var(--g1); }
+.label .n { color: var(--red); margin-right: 8px; }
+.lead { margin: 0 0 8px; font-size: var(--t-lead); line-height: 1.3; }
+.small { margin: 0; font-size: var(--t-body); line-height: 1.5; color: var(--g1); }
+.small b { color: var(--ink); font-weight: normal; }
+.blk { padding: 0 0 16px; margin-bottom: 16px; border-bottom: 0.6px solid var(--g4); }
+.blk:last-child { border-bottom: 0; margin-bottom: 0; }
+.tag { position: absolute; left: 10px; top: 8px; font-size: var(--t-data); color: var(--ink); background: rgba(255,255,255,.85); padding: 1px 6px; }
+.rel { position: relative; }
+.media { position: relative; background: #E6E6E6; overflow: hidden; }
+.media video, .media img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.body { display: grid; grid-template-columns: 1fr 1130px; column-gap: 44px; min-height: 0; }
+.text { border-top: 1.4px solid var(--ink); padding-top: 16px; }
+.figs { border-top: 1.4px solid var(--ink); padding-top: 14px; display: flex; flex-direction: column; gap: 18px; min-height: 0; }
+table { border-collapse: collapse; width: 100%; font-size: 13px; }
+th { text-align: left; font-weight: bold; font-size: 13px; padding: 5px 6px 5px 0; border-bottom: 0.8px solid var(--ink); }
+td { padding: 4px 6px 4px 0; border-bottom: 0.6px solid var(--g4); vertical-align: middle; }
+tr.pick td { color: var(--red); } tr.pick td:first-child { font-weight: bold; }
+.no { color: var(--g2); }
+.note { margin: 8px 0 0; font-size: 13px; color: var(--g1); line-height: 1.45; }
+.note b { color: var(--ink); }
+.formula { font-size: 22px; margin: 4px 0 8px; color: var(--red); }
+.decide { margin-top: 14px; border-left: 3px solid var(--red); padding: 6px 0 6px 14px; }
+.decide h3 { margin: 0 0 4px; font-size: 14px; font-weight: bold; letter-spacing: 0.06em; text-transform: uppercase; color: var(--g1); }
+.decide p { margin: 0; font-size: 14px; line-height: 1.45; }
+.row2 { border-top: 1.4px solid var(--ink); padding-top: 12px; min-height: 0; }
+.pair { display: grid; grid-template-columns: 1fr 1fr; column-gap: 24px; }
+.pair img { width: 100%; height: 640px; object-fit: cover; display: block; }
+.strip { margin: 0 -56px 0 -150px; overflow: hidden; }
+.track { display: flex; gap: 12px; width: max-content; animation: mq 60s linear infinite; }
+.strip:hover .track { animation-play-state: paused; }
+.track figure { flex: none; position: relative; }
+.track img { height: 600px; width: auto; display: block; }
+@keyframes mq { to { transform: translateX(calc(-50% - 6px)); } }
+@media (prefers-reduced-motion: reduce) { .track { animation: none; } }
+.seg { display: inline-flex; border: 0.8px solid var(--ink); flex-wrap: wrap; }
+.seg button { font: inherit; font-size: 13px; padding: 4px 9px; background: #fff; color: var(--ink); border: 0; border-left: 0.8px solid var(--ink); cursor: pointer; }
+.seg button:first-child { border-left: 0; }
+.seg button[aria-pressed="true"] { background: var(--red); color: #fff; }
+.seg button:focus-visible { outline: 2px solid var(--red); outline-offset: 2px; }
+.read { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px 18px; margin: 4px 0 0; border-top: 0.6px solid var(--g3); padding-top: 10px; }
+.read div { display: flex; flex-direction: column; }
+.read dt { font-size: 13px; color: var(--g1); }
+.read dd { margin: 0; font-size: 20px; font-variant-numeric: tabular-nums; }
+.read dd small { font-size: 12px; color: var(--g1); margin-left: 4px; }
+.ctl { display: grid; grid-template-columns: 150px 1fr 70px; align-items: center; gap: 10px; margin: 0 0 8px; font-size: 13px; }
+.ctl b { font-weight: bold; }
+.ctl input[type=range] { width: 100%; accent-color: var(--red); }
+.ctl output { font-variant-numeric: tabular-nums; text-align: right; }
+
+</style></head>
+<body><div id="fit"><div class="sheet">
+
+<header><h1>9. Inside: How It Runs</h1><p class="lede">Behind the dial: a clock chip, a stepper, one gear pair and a lamp driver, all within 35.5 mm.</p></header>
+<div class="body" style="grid-template-columns:1fr 1010px">
+  <div class="text">
+    <section class="blk"><p class="label"><span class="n">9.1</span>Keep time</p><p class="lead">A real-time clock decides which sector is lit.</p>
+      <p class="small">A DS3231 clock, backed by a CR1220 cell, keeps the time through power cuts. The ESP32-C3 reads it and works out which of the twelve sectors belongs to the current two hours.</p></section>
+    <section class="blk"><p class="label"><span class="n">9.2</span>Move the light</p><p class="lead">Every two hours the head steps on by 30°.</p>
+      <p class="small">At each even hour the TMC2209 drives the 28BYJ-48. Through the 12 : 60 gear pair the tube and head turn 30° in about 1.7 s, then hold still until the next even hour.</p></section>
+    <section class="blk"><p class="label"><span class="n">9.3</span>Light the sector</p><p class="lead">The window, not the LED, draws the beam.</p>
+      <p class="small">An AMC7135 constant-current driver feeds the LED through two leads inside the Ø 3 mm tube. The 30° window in the black insert sets where the lit sector begins and ends.</p></section>
+    <section class="blk"><p class="label"><span class="n">9.4</span>Midnight</p><p class="lead">A rewind replaces the slip ring.</p>
+      <p class="small">At 00:00 the head runs back 330° in about 18 s, so the leads never twist by more than one turn. A magnet in the gear passes the hall sensor on the way and resets the zero once a day.</p></section>
+    <section class="blk"><p class="label"><span class="n">9.5</span>Power</p><p class="lead">One cable, one screw.</p>
+      <p class="small">5 V enters through a USB-C socket at the bottom of the back shell; a keyhole in the shell hangs the clock on a single screw.</p></section>
+  </div>
+  <div class="figs">
+    <figure><img src="../assets/fig_inside.png" data-full="../assets/fig_inside.png" alt="Exploded half-section of the wall edition"><figcaption><b>Figure 15.</b> (a) Exploded half-section of the wall edition, rendered from the final model; wires omitted. (b) The electronics on the back of the carrier. Click to enlarge.</figcaption></figure>
+  </div>
+</div>
+</div></div><script>(() => { const f = document.getElementById('fit');
+  const fit = () => { const s = Math.min(innerWidth / 1920, innerHeight / 1080); f.style.transform = `scale(${s})`;
+    f.style.left = `${(innerWidth - 1920 * s) / 2}px`; f.style.top = `${(innerHeight - 1080 * s) / 2}px`; };
+  addEventListener('resize', fit); fit(); })();</script><style id="anim">
+html, body { background: #fff !important; }
+.js-anim .rule, .js-anim .col, .js-anim .text, .js-anim .figs, .js-anim .row2 { position: relative; border-top-color: transparent !important; }
+.js-anim .rule::before, .js-anim .col::before, .js-anim .text::before, .js-anim .figs::before, .js-anim .row2::before {
+  content: ""; position: absolute; left: 0; top: -1.4px; height: 1.4px; width: 100%; background: #1E1E1E;
+  transform: scaleX(0); transform-origin: 0 0; transition: transform .7s cubic-bezier(.2,.7,.2,1); }
+.js-anim.in .rule::before, .js-anim.in .col::before, .js-anim.in .text::before, .js-anim.in .figs::before, .js-anim.in .row2::before { transform: scaleX(1); }
+.js-anim [data-a] { opacity: 0; transform: translateY(12px); transition: opacity .5s ease, transform .5s ease; }
+.js-anim.in [data-a] { opacity: 1; transform: none; }
+</style>
+<script>
+(function () {
+  var root = document.documentElement;
+  if (window === window.parent) return;
+  var still = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (!still) root.classList.add('js-anim');
+  var sel = 'header > *, .label, .lead, .small, .q, .note, .formula, .decide, figure, table, .route, .stage, .ctl, .read, .grp, .step, .tag, .media, .hours';
+  var i = 0;
+  document.querySelectorAll(sel).forEach(function (el) {
+    if (el.parentElement && el.parentElement.closest('[data-a]')) return;
+    el.setAttribute('data-a', ''); el.style.transitionDelay = Math.min(i++ * 70, 1000) + 'ms';
+  });
+  document.querySelectorAll('img[data-full]').forEach(function (im) {
+    im.style.cursor = 'zoom-in';
+    im.addEventListener('click', function () { window.parent.postMessage({ lb: new URL(im.dataset.full, location.href).href, cap: im.dataset.cap || '' }, '*'); });
+  });
+  window.addEventListener('message', function (e) {
+    var vids = document.querySelectorAll('video');
+    if (e.data === 'in') { root.classList.add('in'); vids.forEach(function (v) { var p = v.play && v.play(); if (p && p.catch) p.catch(function () {}); }); }
+    if (e.data === 'out') vids.forEach(function (v) { v.pause(); });
+  });
+})();
+</script></body></html>

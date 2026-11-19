@@ -1,0 +1,325 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+  "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" width="684pt" height="397.414293pt" viewBox="0 0 684 397.414293" xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:c2pa="http://c2pa.org/manifest">
+ <metadata><c2pa:manifest>AAAWgmp1bWIAAAAeanVtZGMycGEAEQAQgAAAqgA4m3EDYzJwYQAAABZcanVtYgAAAEdqdW1kYzJtYQARABCAAACqADibcQN1cm46YzJwYTowN2RhNmNhMi1kNGJiLTQzOTUtYWQzMy1jYzA0MzU2Mzc2ZmMAAAADl2p1bWIAAAApanVtZGMyYXMAEQAQgAAAqgA4m3EDYzJwYS5hc3NlcnRpb25zAAAAALxqdW1iAAAARGp1bWRjYm9yABEAEIAAAKoAOJtxE2MycGEuaW5ncmVkaWVudC52MwAAAAAYYzJzaI10eHyZNR8Ins6yfVLifTsAAABwY2JvcqNpZGM6Zm9ybWF0bWltYWdlL3N2Zyt4bWxqaW5zdGFuY2VJRHgseG1wOmlpZDo1NmYxYWE3OC0zNjk1LTRhMjUtOTgwNi01Zjk5NmFhMDc3NmJscmVsYXRpb25zaGlwaHBhcmVudE9mAAAB4mp1bWIAAABBanVtZGNib3IAEQAQgAAAqgA4m3ETYzJwYS5hY3Rpb25zLnYyAAAAABhjMnNoMyfs8kxF/LEo8IrlA+hGtwAAAZljYm9yomdhY3Rpb25zgqJmYWN0aW9ua2MycGEub3BlbmVkanBhcmFtZXRlcnOha2luZ3JlZGllbnRzgaJjdXJseC1zZWxmI2p1bWJmPWMycGEuYXNzZXJ0aW9ucy9jMnBhLmluZ3JlZGllbnQudjNkaGFzaFggXrKARMJYNUqJNVvcIsxFYp5KSxgX3W9A4ql5PHVVs5OkZmFjdGlvbngdY29tLmFudGhyb3BpYy5jbGF1ZGUucHJvdmlkZWRqcGFyYW1ldGVyc6F4H2NvbS5hbnRocm9waWMub3JpZ2luLWNvbmZpZGVuY2VndW5rbm93bmtkZXNjcmlwdGlvbnhmQ2xhdWRlIHByb3ZpZGVkIHRoaXMgZmlsZSBhdCB0aGUgcmVxdWVzdCBvZiBhIHVzZXIgYW5kIG1heSBoYXZlIGNyZWF0ZWQgb3IgbW9kaWZpZWQgdGhlIGZpbGUgY29udGVudHMubXNvZnR3YXJlQWdlbnShZG5hbWVmQ2xhdWRlcmFsbEFjdGlvbnNJbmNsdWRlZPUAAADIanVtYgAAAEBqdW1kY2JvcgARABCAAACqADibcRNjMnBhLmhhc2guZGF0YQAAAAAYYzJzaG/IDXjry5zeRxQNmrsOteYAAACAY2JvcqVjYWxnZnNoYTI1NmNwYWRMAAAAAAAAAAAAAAAAZGhhc2hYIPjDgFSq0X8fcfnra/U61fkQc48gCNrGbLxxWNqYMRdGZG5hbWVuanVtYmYgbWFuaWZlc3RqZXhjbHVzaW9uc4GiZXN0YXJ0GQF/Zmxlbmd0aBkeBAAAAj5qdW1iAAAAJ2p1bWRjMmNsABEAEIAAAKoAOJtxA2MycGEuY2xhaW0udjIAAAACD2Nib3KlY2FsZ2ZzaGEyNTZpc2lnbmF0dXJleE1zZWxmI2p1bWJmPS9jMnBhL3VybjpjMnBhOjA3ZGE2Y2EyLWQ0YmItNDM5NS1hZDMzLWNjMDQzNTYzNzZmYy9jMnBhLnNpZ25hdHVyZWppbnN0YW5jZUlEeCx4bXA6aWlkOjVkOTc1OGNiLWMxNmItNDJlOS1hYzM0LWZiNTY3OTIxMDQwNHJjcmVhdGVkX2Fzc2VydGlvbnODomN1cmx4LXNlbGYjanVtYmY9YzJwYS5hc3NlcnRpb25zL2MycGEuaW5ncmVkaWVudC52M2RoYXNoWCBesoBEwlg1Sok1W9wizEVinkpLGBfdb0DiqXk8dVWzk6JjdXJseCpzZWxmI2p1bWJmPWMycGEuYXNzZXJ0aW9ucy9jMnBhLmFjdGlvbnMudjJkaGFzaFgg10Sty6jSQzTX/Zzt7kH01BgairT04gn5bsLedHW2O1yiY3VybHgpc2VsZiNqdW1iZj1jMnBhLmFzc2VydGlvbnMvYzJwYS5oYXNoLmRhdGFkaGFzaFggx4f7qQaPy2mpYE7n8JVaXKGJ20t+4vgerjAICCVioFt0Y2xhaW1fZ2VuZXJhdG9yX2luZm+jZG5hbWVvQW50aHJvcGljIEZpbGVzZ3ZlcnNpb25lMS4wLjBrc3BlY1ZlcnNpb25lMi40LjAAABA4anVtYgAAAChqdW1kYzJjcwARABCAAACqADibcQNjMnBhLnNpZ25hdHVyZQAAABAIY2JvctKEWQISogEmGCFZAgowggIGMIIBjaADAgECAhRA5aAK7sI50L64g/oGQgU9Z1UTADAKBggqhkjOPQQDAzBJMRcwFQYDVQQKEw5BbnRocm9waWMsIFBCQzEuMCwGA1UEAxMlQW50aHJvcGljIENvbnRlbnQgQ3JlZGVudGlhbHMgUm9vdCBDQTAeFw0yNjA4MDcxODQzNTZaFw0yODA4MDYxOTQzNTZaMEQxFzAVBgNVBAoTDkFudGhyb3BpYywgUEJDMSkwJwYDVQQDEyBBbnRocm9waWMgQ2xhdWRlIENvbnRlbnQgU2lnbmluZzBZMBMGByqGSM49AgEGCCqGSM49AwEHA0IABJh6CmvLUBgFFNU0vUKlOVtE6djd17L5SuwX0LemFisBM3dkd/3cyjxFA3Qo5S46fX0/ihY0VZ7mfb9KF703t5OjWDBWMA4GA1UdDwEB/wQEAwIHgDAVBgNVHSUEDjAMBgorBgEEAYPoXgIBMAwGA1UdEwEB/wQCMAAwHwYDVR0jBBgwFoAUzlHiBIFOZFsj+OPEz5o+nMHXXMIwCgYIKoZIzj0EAwMDZwAwZAIwMXMdFJ4BetLLVY7ORuE9noqbbAZOZn/aArXyTwFAZfKrPzxF2vPoJNf1+UCdg1XGAjBwX1zd9WGqYkqmL5SFqw1QySjr1zJfpJM9+1rdDwSPLMOPOjKuiXjoU/pUUeG9RwmhY3BhZFkNngAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPZYQA+YXevmGq7P042yFQqP2whUYG4U7kif+nYiV/j7tAzsCk8z/P5FrBmQIdHXKhVCpdtQhzcPKYBfFTfTRXvLmVk=</c2pa:manifest>
+  <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+   <cc:Work>
+    <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+    <dc:date>2026-10-15T10:17:52.235895</dc:date>
+    <dc:format>image/svg+xml</dc:format>
+    <dc:creator>
+     <cc:Agent>
+      <dc:title>Matplotlib v3.11.2, https://matplotlib.org/</dc:title>
+     </cc:Agent>
+    </dc:creator>
+   </cc:Work>
+  </rdf:RDF>
+ </metadata>
+ <defs>
+  <style type="text/css">*{stroke-linejoin: round; stroke-linecap: butt}</style>
+ </defs>
+ <g id="figure_1">
+  <g id="patch_1">
+   <path d="M 0 397.414293 
+L 684 397.414293 
+L 684 -0 
+L 0 -0 
+z
+" style="fill: #ffffff"/>
+  </g>
+  <g id="axes_1">
+   <g id="line2d_1">
+    <path d="M 40.909091 34.455747 
+L 643.090909 34.455747 
+" clip-path="url(#p740911b06f)" style="fill: none; stroke: #000000; stroke-width: 1.2; stroke-linecap: square"/>
+   </g>
+   <g id="line2d_2">
+    <path d="M 40.909091 61.896673 
+L 643.090909 61.896673 
+" clip-path="url(#p740911b06f)" style="fill: none; stroke: #000000; stroke-width: 0.6; stroke-linecap: square"/>
+   </g>
+   <g id="line2d_3">
+    <path d="M 40.909091 369.844838 
+L 643.090909 369.844838 
+" clip-path="url(#p740911b06f)" style="fill: none; stroke: #000000; stroke-width: 1.2; stroke-linecap: square"/>
+   </g>
+   <g id="text_1">
+    <text style="font-weight: 700; font-size: 12px; font-family: 'Times New Roman', 'Times New Roman'; text-anchor: start" x="40.909091" y="18.93375" transform="rotate(-0 40.909091 18.93375)">Table 1. Key spatial and design parameters</text>
+   </g>
+   <g id="text_2">
+    <text style="font-weight: 700; font-size: 11px; font-family: 'Times New Roman', 'Times New Roman'; text-anchor: start" x="40.909091" y="49.189556" transform="rotate(-0 40.909091 49.189556)">Parameter</text>
+   </g>
+   <g id="text_3">
+    <text style="font-weight: 700; font-size: 11px; font-family: 'Times New Roman', 'Times New Roman'; text-anchor: start" x="279.272727" y="49.189556" transform="rotate(-0 279.272727 49.189556)">Value</text>
+   </g>
+   <g id="text_4">
+    <text style="font-weight: 700; font-size: 11px; font-family: 'Times New Roman', 'Times New Roman'; text-anchor: start" x="404.727273" y="49.189556" transform="rotate(-0 404.727273 49.189556)">Note</text>
+   </g>
+   <g id="text_5">
+    <text style="font-size: 11px; font-family: 'Times New Roman', 'Times New Roman'; text-anchor: start" x="40.909091" y="81.298178" transform="rotate(-0 40.909091 81.298178)">Lateral offset between chairs</text>
+   </g>
+   <g id="text_6">
+    <text style="font-size: 11px; font-family: 'Times New Roman', 'Times New Roman'; text-anchor: start" x="279.272727" y="81.292592" transform="rotate(-0 279.272727 81.292592)">600 mm</text>
+   </g>
+   <g id="text_7">
+    <text style="font-size: 11px; font-family: 'Times New Roman', 'Times New Roman'; text-anchor: start; fill: #444444" x="404.727273" y="81.298178" transform="rotate(-0 404.727273 81.298178)">Centreline to centreline</text>
+   </g>
+   <g id="text_8">
+    <!-- Backrest spacing, $d$ -->
+    <g transform="translate(40.909091 111.796045)">
+     <text>
+      <tspan x="0" y="-0.359375" style="font-size: 11px; font-family: 'Times New Roman'">B</tspan>
+      <tspan x="7.336914" y="-0.359375" style="font-size: 11px; font-family: 'Times New Roman'">a</tspan>
+      <tspan x="12.219238" y="-0.359375" style="font-size: 11px; font-family: 'Times New Roman'">c</tspan>
+      <tspan x="17.101562" y="-0.359375" style="font-size: 11px; font-family: 'Times New Roman'">k</tspan>
+      <tspan x="22.601562" y="-0.359375" style="font-size: 11px; font-family: 'Times New Roman'">r</tspan>
+      <tspan x="26.264648" y="-0.359375" style="font-size: 11px; font-family: 'Times New Roman'">e</tspan>
+      <tspan x="31.146973" y="-0.359375" style="font-size: 11px; font-family: 'Times New Roman'">s</tspan>
+      <tspan x="35.427734" y="-0.359375" style="font-size: 11px; font-family: 'Times New Roman'">t</tspan>
+      <tspan x="38.483887" y="-0.359375" style="font-size: 11px; font-family: 'Times New Roman'"> </tspan>
+      <tspan x="41.233887" y="-0.359375" style="font-size: 11px; font-family: 'Times New Roman'">s</tspan>
+      <tspan x="45.514648" y="-0.359375" style="font-size: 11px; font-family: 'Times New Roman'">p</tspan>
+      <tspan x="51.014648" y="-0.359375" style="font-size: 11px; font-family: 'Times New Roman'">a</tspan>
+      <tspan x="55.896973" y="-0.359375" style="font-size: 11px; font-family: 'Times New Roman'">c</tspan>
+      <tspan x="60.779297" y="-0.359375" style="font-size: 11px; font-family: 'Times New Roman'">i</tspan>
+      <tspan x="63.835449" y="-0.359375" style="font-size: 11px; font-family: 'Times New Roman'">n</tspan>
+      <tspan x="69.335449" y="-0.359375" style="font-size: 11px; font-family: 'Times New Roman'">g</tspan>
+      <tspan x="74.835449" y="-0.359375" style="font-size: 11px; font-family: 'Times New Roman'">,</tspan>
+      <tspan x="77.585449" y="-0.359375" style="font-size: 11px; font-family: 'Times New Roman'"> </tspan>
+      <tspan x="80.335449" y="-0.359375" style="font-style: italic; font-size: 11px; font-family: 'Times New Roman'">d</tspan>
+     </text>
+    </g>
+   </g>
+   <g id="text_9">
+    <text style="font-size: 11px; font-family: 'Times New Roman', 'Times New Roman'; text-anchor: start" x="279.272727" y="111.78251" transform="rotate(-0 279.272727 111.78251)">2000 mm</text>
+   </g>
+   <g id="text_10">
+    <text style="font-size: 11px; font-family: 'Times New Roman', 'Times New Roman'; text-anchor: start; fill: #444444" x="404.727273" y="111.788096" transform="rotate(-0 404.727273 111.788096)">At 1600 mm height; 1664 mm at ground</text>
+   </g>
+   <g id="text_11">
+    <text style="font-size: 11px; font-family: 'Times New Roman', 'Times New Roman'; text-anchor: start" x="40.909091" y="142.278013" transform="rotate(-0 40.909091 142.278013)">Backrest recline</text>
+   </g>
+   <g id="text_12">
+    <text style="font-size: 11px; font-family: 'Times New Roman', 'Times New Roman'; text-anchor: start" x="279.272727" y="142.272427" transform="rotate(-0 279.272727 142.272427)">6°</text>
+   </g>
+   <g id="text_13">
+    <text style="font-size: 11px; font-family: 'Times New Roman', 'Times New Roman'; text-anchor: start; fill: #444444" x="404.727273" y="142.278013" transform="rotate(-0 404.727273 142.278013)">Both chairs, away from each other</text>
+   </g>
+   <g id="text_14">
+    <text style="font-size: 11px; font-family: 'Times New Roman', 'Times New Roman'; text-anchor: start" x="40.909091" y="172.76793" transform="rotate(-0 40.909091 172.76793)">Design viewpoint</text>
+   </g>
+   <g id="text_15">
+    <text style="font-size: 11px; font-family: 'Times New Roman', 'Times New Roman'; text-anchor: start" x="279.272727" y="172.76793" transform="rotate(-0 279.272727 172.76793)">Eye height 1600 mm</text>
+   </g>
+   <g id="text_16">
+    <!-- $D$ = 3000 mm from Chair A backrest -->
+    <g style="fill: #444444" transform="translate(404.727273 172.798868)">
+     <text>
+      <tspan x="0" y="-0.359375" style="font-style: italic; font-size: 11px; font-family: 'Times New Roman'; fill: #444444">D</tspan>
+      <tspan x="7.943848" y="-0.359375" style="font-size: 11px; font-family: 'Times New Roman'; fill: #444444"> </tspan>
+      <tspan x="10.693848" y="-0.359375" style="font-size: 11px; font-family: 'Times New Roman'; fill: #444444">=</tspan>
+      <tspan x="16.897461" y="-0.359375" style="font-size: 11px; font-family: 'Times New Roman'; fill: #444444"> </tspan>
+      <tspan x="19.647461" y="-0.359375" style="font-size: 11px; font-family: 'Times New Roman'; fill: #444444">3</tspan>
+      <tspan x="25.147461" y="-0.359375" style="font-size: 11px; font-family: 'Times New Roman'; fill: #444444">0</tspan>
+      <tspan x="30.647461" y="-0.359375" style="font-size: 11px; font-family: 'Times New Roman'; fill: #444444">0</tspan>
+      <tspan x="36.147461" y="-0.359375" style="font-size: 11px; font-family: 'Times New Roman'; fill: #444444">0</tspan>
+      <tspan x="41.647461" y="-0.359375" style="font-size: 11px; font-family: 'Times New Roman'; fill: #444444"> </tspan>
+      <tspan x="44.397461" y="-0.359375" style="font-size: 11px; font-family: 'Times New Roman'; fill: #444444">m</tspan>
+      <tspan x="52.953613" y="-0.359375" style="font-size: 11px; font-family: 'Times New Roman'; fill: #444444">m</tspan>
+      <tspan x="61.509766" y="-0.359375" style="font-size: 11px; font-family: 'Times New Roman'; fill: #444444"> </tspan>
+      <tspan x="64.259766" y="-0.359375" style="font-size: 11px; font-family: 'Times New Roman'; fill: #444444">f</tspan>
+      <tspan x="67.922852" y="-0.359375" style="font-size: 11px; font-family: 'Times New Roman'; fill: #444444">r</tspan>
+      <tspan x="71.585938" y="-0.359375" style="font-size: 11px; font-family: 'Times New Roman'; fill: #444444">o</tspan>
+      <tspan x="77.085938" y="-0.359375" style="font-size: 11px; font-family: 'Times New Roman'; fill: #444444">m</tspan>
+      <tspan x="85.64209" y="-0.359375" style="font-size: 11px; font-family: 'Times New Roman'; fill: #444444"> </tspan>
+      <tspan x="88.39209" y="-0.359375" style="font-size: 11px; font-family: 'Times New Roman'; fill: #444444">C</tspan>
+      <tspan x="95.729004" y="-0.359375" style="font-size: 11px; font-family: 'Times New Roman'; fill: #444444">h</tspan>
+      <tspan x="101.229004" y="-0.359375" style="font-size: 11px; font-family: 'Times New Roman'; fill: #444444">a</tspan>
+      <tspan x="106.111328" y="-0.359375" style="font-size: 11px; font-family: 'Times New Roman'; fill: #444444">i</tspan>
+      <tspan x="109.16748" y="-0.359375" style="font-size: 11px; font-family: 'Times New Roman'; fill: #444444">r</tspan>
+      <tspan x="112.830566" y="-0.359375" style="font-size: 11px; font-family: 'Times New Roman'; fill: #444444"> </tspan>
+      <tspan x="115.580566" y="-0.359375" style="font-size: 11px; font-family: 'Times New Roman'; fill: #444444">A</tspan>
+      <tspan x="123.524414" y="-0.359375" style="font-size: 11px; font-family: 'Times New Roman'; fill: #444444"> </tspan>
+      <tspan x="126.274414" y="-0.359375" style="font-size: 11px; font-family: 'Times New Roman'; fill: #444444">b</tspan>
+      <tspan x="131.774414" y="-0.359375" style="font-size: 11px; font-family: 'Times New Roman'; fill: #444444">a</tspan>
+      <tspan x="136.656738" y="-0.359375" style="font-size: 11px; font-family: 'Times New Roman'; fill: #444444">c</tspan>
+      <tspan x="141.539062" y="-0.359375" style="font-size: 11px; font-family: 'Times New Roman'; fill: #444444">k</tspan>
+      <tspan x="147.039062" y="-0.359375" style="font-size: 11px; font-family: 'Times New Roman'; fill: #444444">r</tspan>
+      <tspan x="150.702148" y="-0.359375" style="font-size: 11px; font-family: 'Times New Roman'; fill: #444444">e</tspan>
+      <tspan x="155.584473" y="-0.359375" style="font-size: 11px; font-family: 'Times New Roman'; fill: #444444">s</tspan>
+      <tspan x="159.865234" y="-0.359375" style="font-size: 11px; font-family: 'Times New Roman'; fill: #444444">t</tspan>
+     </text>
+    </g>
+   </g>
+   <g id="text_17">
+    <text style="font-size: 11px; font-family: 'Times New Roman', 'Times New Roman'; text-anchor: start" x="40.909091" y="203.257848" transform="rotate(-0 40.909091 203.257848)">Observer lateral position</text>
+   </g>
+   <g id="text_18">
+    <text style="font-size: 11px; font-family: 'Times New Roman', 'Times New Roman'; text-anchor: start" x="279.272727" y="203.252262" transform="rotate(-0 279.272727 203.252262)">900 mm</text>
+   </g>
+   <g id="text_19">
+    <text style="font-size: 11px; font-family: 'Times New Roman', 'Times New Roman'; text-anchor: start; fill: #444444" x="404.727273" y="203.257848" transform="rotate(-0 404.727273 203.257848)">From Chair A centreline</text>
+   </g>
+   <g id="text_20">
+    <!-- Grating period, front layer, $p_A$ -->
+    <g transform="translate(40.909091 233.755714)">
+     <text>
+      <tspan x="0" y="-0.359375" style="font-size: 11px; font-family: 'Times New Roman'">G</tspan>
+      <tspan x="7.943848" y="-0.359375" style="font-size: 11px; font-family: 'Times New Roman'">r</tspan>
+      <tspan x="11.606934" y="-0.359375" style="font-size: 11px; font-family: 'Times New Roman'">a</tspan>
+      <tspan x="16.489258" y="-0.359375" style="font-size: 11px; font-family: 'Times New Roman'">t</tspan>
+      <tspan x="19.54541" y="-0.359375" style="font-size: 11px; font-family: 'Times New Roman'">i</tspan>
+      <tspan x="22.601562" y="-0.359375" style="font-size: 11px; font-family: 'Times New Roman'">n</tspan>
+      <tspan x="28.101562" y="-0.359375" style="font-size: 11px; font-family: 'Times New Roman'">g</tspan>
+      <tspan x="33.601562" y="-0.359375" style="font-size: 11px; font-family: 'Times New Roman'"> </tspan>
+      <tspan x="36.351562" y="-0.359375" style="font-size: 11px; font-family: 'Times New Roman'">p</tspan>
+      <tspan x="41.851562" y="-0.359375" style="font-size: 11px; font-family: 'Times New Roman'">e</tspan>
+      <tspan x="46.733887" y="-0.359375" style="font-size: 11px; font-family: 'Times New Roman'">r</tspan>
+      <tspan x="50.396973" y="-0.359375" style="font-size: 11px; font-family: 'Times New Roman'">i</tspan>
+      <tspan x="53.453125" y="-0.359375" style="font-size: 11px; font-family: 'Times New Roman'">o</tspan>
+      <tspan x="58.953125" y="-0.359375" style="font-size: 11px; font-family: 'Times New Roman'">d</tspan>
+      <tspan x="64.453125" y="-0.359375" style="font-size: 11px; font-family: 'Times New Roman'">,</tspan>
+      <tspan x="67.203125" y="-0.359375" style="font-size: 11px; font-family: 'Times New Roman'"> </tspan>
+      <tspan x="69.953125" y="-0.359375" style="font-size: 11px; font-family: 'Times New Roman'">f</tspan>
+      <tspan x="73.616211" y="-0.359375" style="font-size: 11px; font-family: 'Times New Roman'">r</tspan>
+      <tspan x="77.279297" y="-0.359375" style="font-size: 11px; font-family: 'Times New Roman'">o</tspan>
+      <tspan x="82.779297" y="-0.359375" style="font-size: 11px; font-family: 'Times New Roman'">n</tspan>
+      <tspan x="88.279297" y="-0.359375" style="font-size: 11px; font-family: 'Times New Roman'">t</tspan>
+      <tspan x="91.335449" y="-0.359375" style="font-size: 11px; font-family: 'Times New Roman'"> </tspan>
+      <tspan x="94.085449" y="-0.359375" style="font-size: 11px; font-family: 'Times New Roman'">l</tspan>
+      <tspan x="97.141602" y="-0.359375" style="font-size: 11px; font-family: 'Times New Roman'">a</tspan>
+      <tspan x="102.023926" y="-0.359375" style="font-size: 11px; font-family: 'Times New Roman'">y</tspan>
+      <tspan x="107.523926" y="-0.359375" style="font-size: 11px; font-family: 'Times New Roman'">e</tspan>
+      <tspan x="112.40625" y="-0.359375" style="font-size: 11px; font-family: 'Times New Roman'">r</tspan>
+      <tspan x="116.069336" y="-0.359375" style="font-size: 11px; font-family: 'Times New Roman'">,</tspan>
+      <tspan x="118.819336" y="-0.359375" style="font-size: 11px; font-family: 'Times New Roman'"> </tspan>
+      <tspan x="121.569336" y="-0.359375" style="font-style: italic; font-size: 11px; font-family: 'Times New Roman'">p</tspan>
+      <tspan x="127.069336" y="1.098437" style="font-style: italic; font-size: 7.7px; font-family: 'Times New Roman'">A</tspan>
+     </text>
+    </g>
+   </g>
+   <g id="text_21">
+    <text style="font-size: 11px; font-family: 'Times New Roman', 'Times New Roman'; text-anchor: start" x="279.272727" y="233.742179" transform="rotate(-0 279.272727 233.742179)">12.6 mm</text>
+   </g>
+   <g id="text_22">
+    <text style="font-size: 11px; font-family: 'Times New Roman', 'Times New Roman'; text-anchor: start; fill: #444444" x="404.727273" y="233.747765" transform="rotate(-0 404.727273 233.747765)">Chair A; straight slots</text>
+   </g>
+   <g id="text_23">
+    <!-- Grating period, rear layer, $p_B$ -->
+    <g transform="translate(40.909091 264.245632)">
+     <text>
+      <tspan x="0" y="-0.359375" style="font-size: 11px; font-family: 'Times New Roman'">G</tspan>
+      <tspan x="7.943848" y="-0.359375" style="font-size: 11px; font-family: 'Times New Roman'">r</tspan>
+      <tspan x="11.606934" y="-0.359375" style="font-size: 11px; font-family: 'Times New Roman'">a</tspan>
+      <tspan x="16.489258" y="-0.359375" style="font-size: 11px; font-family: 'Times New Roman'">t</tspan>
+      <tspan x="19.54541" y="-0.359375" style="font-size: 11px; font-family: 'Times New Roman'">i</tspan>
+      <tspan x="22.601562" y="-0.359375" style="font-size: 11px; font-family: 'Times New Roman'">n</tspan>
+      <tspan x="28.101562" y="-0.359375" style="font-size: 11px; font-family: 'Times New Roman'">g</tspan>
+      <tspan x="33.601562" y="-0.359375" style="font-size: 11px; font-family: 'Times New Roman'"> </tspan>
+      <tspan x="36.351562" y="-0.359375" style="font-size: 11px; font-family: 'Times New Roman'">p</tspan>
+      <tspan x="41.851562" y="-0.359375" style="font-size: 11px; font-family: 'Times New Roman'">e</tspan>
+      <tspan x="46.733887" y="-0.359375" style="font-size: 11px; font-family: 'Times New Roman'">r</tspan>
+      <tspan x="50.396973" y="-0.359375" style="font-size: 11px; font-family: 'Times New Roman'">i</tspan>
+      <tspan x="53.453125" y="-0.359375" style="font-size: 11px; font-family: 'Times New Roman'">o</tspan>
+      <tspan x="58.953125" y="-0.359375" style="font-size: 11px; font-family: 'Times New Roman'">d</tspan>
+      <tspan x="64.453125" y="-0.359375" style="font-size: 11px; font-family: 'Times New Roman'">,</tspan>
+      <tspan x="67.203125" y="-0.359375" style="font-size: 11px; font-family: 'Times New Roman'"> </tspan>
+      <tspan x="69.953125" y="-0.359375" style="font-size: 11px; font-family: 'Times New Roman'">r</tspan>
+      <tspan x="73.616211" y="-0.359375" style="font-size: 11px; font-family: 'Times New Roman'">e</tspan>
+      <tspan x="78.498535" y="-0.359375" style="font-size: 11px; font-family: 'Times New Roman'">a</tspan>
+      <tspan x="83.380859" y="-0.359375" style="font-size: 11px; font-family: 'Times New Roman'">r</tspan>
+      <tspan x="87.043945" y="-0.359375" style="font-size: 11px; font-family: 'Times New Roman'"> </tspan>
+      <tspan x="89.793945" y="-0.359375" style="font-size: 11px; font-family: 'Times New Roman'">l</tspan>
+      <tspan x="92.850098" y="-0.359375" style="font-size: 11px; font-family: 'Times New Roman'">a</tspan>
+      <tspan x="97.732422" y="-0.359375" style="font-size: 11px; font-family: 'Times New Roman'">y</tspan>
+      <tspan x="103.232422" y="-0.359375" style="font-size: 11px; font-family: 'Times New Roman'">e</tspan>
+      <tspan x="108.114746" y="-0.359375" style="font-size: 11px; font-family: 'Times New Roman'">r</tspan>
+      <tspan x="111.777832" y="-0.359375" style="font-size: 11px; font-family: 'Times New Roman'">,</tspan>
+      <tspan x="114.527832" y="-0.359375" style="font-size: 11px; font-family: 'Times New Roman'"> </tspan>
+      <tspan x="117.277832" y="-0.359375" style="font-style: italic; font-size: 11px; font-family: 'Times New Roman'">p</tspan>
+      <tspan x="122.777832" y="1.098437" style="font-style: italic; font-size: 7.7px; font-family: 'Times New Roman'">B</tspan>
+     </text>
+    </g>
+   </g>
+   <g id="text_24">
+    <text style="font-size: 11px; font-family: 'Times New Roman', 'Times New Roman'; text-anchor: start" x="279.272727" y="264.232096" transform="rotate(-0 279.272727 264.232096)">21 mm</text>
+   </g>
+   <g id="text_25">
+    <text style="font-size: 11px; font-family: 'Times New Roman', 'Times New Roman'; text-anchor: start; fill: #444444" x="404.727273" y="264.237682" transform="rotate(-0 404.727273 264.237682)">Chair B; phase-modulated slots</text>
+   </g>
+   <g id="text_26">
+    <!-- Image inversion step, $\Delta x$ -->
+    <g transform="translate(40.909091 294.735549)">
+     <text>
+      <tspan x="0" y="-0.359375" style="font-size: 11px; font-family: 'Times New Roman'">I</tspan>
+      <tspan x="3.663086" y="-0.359375" style="font-size: 11px; font-family: 'Times New Roman'">m</tspan>
+      <tspan x="12.219238" y="-0.359375" style="font-size: 11px; font-family: 'Times New Roman'">a</tspan>
+      <tspan x="17.101562" y="-0.359375" style="font-size: 11px; font-family: 'Times New Roman'">g</tspan>
+      <tspan x="22.601562" y="-0.359375" style="font-size: 11px; font-family: 'Times New Roman'">e</tspan>
+      <tspan x="27.483887" y="-0.359375" style="font-size: 11px; font-family: 'Times New Roman'"> </tspan>
+      <tspan x="30.233887" y="-0.359375" style="font-size: 11px; font-family: 'Times New Roman'">i</tspan>
+      <tspan x="33.290039" y="-0.359375" style="font-size: 11px; font-family: 'Times New Roman'">n</tspan>
+      <tspan x="38.790039" y="-0.359375" style="font-size: 11px; font-family: 'Times New Roman'">v</tspan>
+      <tspan x="44.290039" y="-0.359375" style="font-size: 11px; font-family: 'Times New Roman'">e</tspan>
+      <tspan x="49.172363" y="-0.359375" style="font-size: 11px; font-family: 'Times New Roman'">r</tspan>
+      <tspan x="52.835449" y="-0.359375" style="font-size: 11px; font-family: 'Times New Roman'">s</tspan>
+      <tspan x="57.116211" y="-0.359375" style="font-size: 11px; font-family: 'Times New Roman'">i</tspan>
+      <tspan x="60.172363" y="-0.359375" style="font-size: 11px; font-family: 'Times New Roman'">o</tspan>
+      <tspan x="65.672363" y="-0.359375" style="font-size: 11px; font-family: 'Times New Roman'">n</tspan>
+      <tspan x="71.172363" y="-0.359375" style="font-size: 11px; font-family: 'Times New Roman'"> </tspan>
+      <tspan x="73.922363" y="-0.359375" style="font-size: 11px; font-family: 'Times New Roman'">s</tspan>
+      <tspan x="78.203125" y="-0.359375" style="font-size: 11px; font-family: 'Times New Roman'">t</tspan>
+      <tspan x="81.259277" y="-0.359375" style="font-size: 11px; font-family: 'Times New Roman'">e</tspan>
+      <tspan x="86.141602" y="-0.359375" style="font-size: 11px; font-family: 'Times New Roman'">p</tspan>
+      <tspan x="91.641602" y="-0.359375" style="font-size: 11px; font-family: 'Times New Roman'">,</tspan>
+      <tspan x="94.391602" y="-0.359375" style="font-size: 11px; font-family: 'Times New Roman'"> </tspan>
+      <tspan x="97.141602" y="-0.359375" style="font-size: 11px; font-family: 'Times New Roman'">Δ</tspan>
+      <tspan x="104.215332" y="-0.359375" style="font-style: italic; font-size: 11px; font-family: 'Times New Roman'">x</tspan>
+     </text>
+    </g>
+   </g>
+   <g id="text_27">
+    <text style="font-size: 11px; font-family: 'Times New Roman', 'Times New Roman'; text-anchor: start" x="279.272727" y="294.722014" transform="rotate(-0 279.272727 294.722014)">31.5 mm</text>
+   </g>
+   <g id="text_28">
+    <!-- $\Delta x = p_B D / d$ -->
+    <g style="fill: #444444" transform="translate(404.727273 294.735549)">
+     <text>
+      <tspan x="0" y="-0.359375" style="font-size: 11px; font-family: 'Times New Roman'; fill: #444444">Δ</tspan>
+      <tspan x="13.544824" y="-0.359375" style="font-size: 11px; font-family: 'Times New Roman'; fill: #444444">=</tspan>
+      <tspan x="39.72749" y="-0.359375" style="font-size: 11px; font-family: 'Times New Roman'; fill: #444444">/</tspan>
+      <tspan x="7.07373" y="-0.359375" style="font-style: italic; font-size: 11px; font-family: 'Times New Roman'; fill: #444444">x</tspan>
+      <tspan x="21.337207" y="-0.359375" style="font-style: italic; font-size: 11px; font-family: 'Times New Roman'; fill: #444444">p</tspan>
+      <tspan x="31.783643" y="-0.359375" style="font-style: italic; font-size: 11px; font-family: 'Times New Roman'; fill: #444444">D</tspan>
+      <tspan x="42.783643" y="-0.359375" style="font-style: italic; font-size: 11px; font-family: 'Times New Roman'; fill: #444444">d</tspan>
+      <tspan x="26.837207" y="1.098437" style="font-style: italic; font-size: 7.7px; font-family: 'Times New Roman'; fill: #444444">B</tspan>
+     </text>
+    </g>
+   </g>
+   <g id="text_29">
+    <text style="font-size: 11px; font-family: 'Times New Roman', 'Times New Roman'; text-anchor: start" x="40.909091" y="325.217517" transform="rotate(-0 40.909091 325.217517)">Minimum slot and web width</text>
+   </g>
+   <g id="text_30">
+    <text style="font-size: 11px; font-family: 'Times New Roman', 'Times New Roman'; text-anchor: start" x="279.272727" y="325.211931" transform="rotate(-0 279.272727 325.211931)">4 mm</text>
+   </g>
+   <g id="text_31">
+    <text style="font-size: 11px; font-family: 'Times New Roman', 'Times New Roman'; text-anchor: start; fill: #444444" x="404.727273" y="325.217517" transform="rotate(-0 404.727273 325.217517)">Laser-cutting constraint</text>
+   </g>
+   <g id="text_32">
+    <text style="font-size: 11px; font-family: 'Times New Roman', 'Times New Roman'; text-anchor: start" x="40.909091" y="355.707434" transform="rotate(-0 40.909091 355.707434)">Material</text>
+   </g>
+   <g id="text_33">
+    <text style="font-size: 11px; font-family: 'Times New Roman', 'Times New Roman'; text-anchor: start" x="279.272727" y="355.707434" transform="rotate(-0 279.272727 355.707434)">Q355 steel plate</text>
+   </g>
+   <g id="text_34">
+    <text style="font-size: 11px; font-family: 'Times New Roman', 'Times New Roman'; text-anchor: start; fill: #444444" x="404.727273" y="355.707434" transform="rotate(-0 404.727273 355.707434)">4 mm thick</text>
+   </g>
+  </g>
+ </g>
+ <defs>
+  <clipPath id="p740911b06f">
+   <rect x="10.8" y="17.686293" width="662.4" height="368.928"/>
+  </clipPath>
+ </defs>
+</svg>

@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Walking Again — 9. Build It from Your Bike</title>
+<link rel="stylesheet" href="../assets/page.css">
+<style>
+  .ct { grid-template-columns: 330px 1fr 500px; gap: 34px; }
+  .inp { display: flex; flex-direction: column; overflow: hidden; }
+  .grp { padding: 10px 0 12px; border-top: 0.6px solid var(--g4); }
+  .grp:first-child { border-top: 0; padding-top: 2px; }
+  .row { display: grid; grid-template-columns: 22px 1fr 86px; align-items: center; gap: 6px; margin-top: 7px; font-size: 14px; color: var(--g1); }
+  .row .k { color: var(--acc); font-weight: 700; font-size: 13px; }
+  .row input { width: 86px; font: inherit; font-size: 14px; color: var(--ink); border: 0; border-bottom: 0.6px solid var(--g3); padding: 2px 2px; text-align: right; background: transparent; }
+  .row input:focus { outline: none; border-bottom-color: var(--acc); }
+  .row small { color: var(--g2); }
+  .seg { display: flex; gap: 0; margin-top: 8px; }
+  .seg label { flex: 1; font-size: 13px; text-align: center; padding: 5px 0; border: 0.6px solid var(--g3); cursor: pointer; color: var(--g1); }
+  .seg label + label { border-left: 0; }
+  .seg input { display: none; }
+  .seg input:checked + span { color: var(--acc); font-weight: 700; }
+  .reset { margin-top: 12px; font: inherit; font-size: 13px; color: var(--g1); background: none; border: 0; border-bottom: 0.6px solid var(--g3); cursor: pointer; padding: 0; align-self: flex-start; }
+  .reset:hover { color: var(--acc); border-color: var(--acc); }
+  .draw { display: flex; flex-direction: column; min-height: 0; }
+  .draw svg { flex: 1; min-height: 0; width: 100%; }
+  .out { overflow: hidden; display: flex; flex-direction: column; }
+  .out h3 { font-size: 14px; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; color: var(--g2); margin: 12px 0 6px; }
+  .out h3:first-child { margin-top: 0; }
+  .out table.t td { padding: 4px 8px 4px 0; }
+  .chk { list-style: none; font-size: 13px; color: var(--g1); }
+  .chk li { display: grid; grid-template-columns: 18px 1fr; gap: 4px; padding: 3px 0; line-height: 1.35; }
+  .chk li i { font-style: normal; font-weight: 700; }
+  .chk li.ok i { color: var(--acc); } .chk li.warn i { color: #B7791F; } .chk li.bad i { color: #1E1E1E; }
+  .chk li.bad { color: var(--ink); }
+  .note { font-size: 12px; color: var(--g2); line-height: 1.35; margin-top: 8px; }
+  .loading { font-size: 14px; color: var(--g2); }
+</style>
+</head>
+<body>
+<div class="stage"><div class="pg">
+  <header class="hd">
+    <h1 class="a">9. Build It from Your Bike</h1>
+    <p class="lede a">Measure an old bike with a tape, and the walker adapts: tube lengths, clamp sizes and the one saw cut follow from six frame dimensions.</p>
+    <div class="rule"></div>
+  </header>
+  <div class="ct">
+    <form class="inp a" id="inp" autocomplete="off">
+      <div class="grp">
+        <div class="label"><b>9.1</b>Frame type</div>
+        <div class="seg">
+          <label><input type="radio" name="type" value="step" checked><span>Step-through</span></label>
+          <label><input type="radio" name="type" value="diamond"><span>Diamond</span></label>
+          <label><input type="radio" name="type" value="other"><span>Other</span></label>
+        </div>
+      </div>
+      <div class="grp">
+        <div class="label"><b>9.2</b>Your bike, mm and °</div>
+        <div class="row"><span class="k">A</span><span>Chainstay, BB to rear axle</span><input name="cs" type="number" step="1" value="440"></div>
+        <div class="row"><span class="k">B</span><span>Rear axle above BB</span><input name="drop" type="number" step="1" value="24"></div>
+        <div class="row"><span class="k">C</span><span>Seat tube, BB to top</span><input name="st" type="number" step="1" value="400"></div>
+        <div class="row"><span class="k">D</span><span>Seat-tube angle</span><input name="ang" type="number" step="0.5" value="70"></div>
+        <div class="row"><span class="k">E</span><span>Gap between dropouts</span><input name="old" type="number" step="1" value="48"></div>
+        <div class="row"><span class="k">F</span><span>BB shell bore</span><input name="bbd" type="number" step="0.1" value="33.6"></div>
+        <div class="row"><span class="k"></span><span>BB shell width</span><input name="bbw" type="number" step="1" value="72"></div>
+        <div class="row"><span class="k">G</span><span>Seat post diameter</span><input name="spd" type="number" step="0.1" value="32.8"></div>
+        <div class="row"><span class="k"></span><span>Seat post length</span><input name="spl" type="number" step="5" value="300"></div>
+        <div class="row"><span class="k">H</span><span>Handlebar width, grip ends</span><input name="bw" type="number" step="5" value="724"></div>
+        <div class="row"><span class="k"></span><span>Grip rise above stem clamp</span><input name="rise" type="number" step="5" value="190"></div>
+      </div>
+      <div class="grp">
+        <div class="label"><b>9.3</b>The user</div>
+        <div class="row"><span class="k">W</span><span>Wrist height, standing</span><input name="wrist" type="number" step="5" value="892"></div>
+        <p class="note">Handgrips are set at wrist-crease height with the arms relaxed. Defaults reproduce the Hellobike model shown in the earlier chapters.</p>
+      </div>
+      <button type="button" class="reset" id="reset">Reset to the Hellobike values</button>
+    </form>
+    <figure class="draw a">
+      <div class="loading" id="loading">Loading the configurator…</div>
+      <svg id="svg" viewBox="0 0 900 760" preserveAspectRatio="xMidYMid meet" font-family="Times New Roman, Times, Liberation Serif, serif"></svg>
+      <figcaption class="cap"><b>Figure 13.</b> Live side elevation. Blue: parts kept from the bike; black: new tubes, seat and casters. Letters match the measurements. The dashed line runs from the seated centre of gravity to the front contact point.</figcaption>
+    </figure>
+    <div class="out a" id="out"></div>
+  </div>
+</div></div>
+<script src="../assets/page.js"></script>
+<script>
+  (function () {
+    var done = false;
+    document.addEventListener('pagein', function () {
+      if (done) return; done = true;
+      var s = document.createElement('script'); s.src = '../assets/configurator.js'; document.body.appendChild(s);
+    });
+  })();
+</script>
+</body>
+</html>
