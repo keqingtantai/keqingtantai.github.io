@@ -1,15 +1,12 @@
-// Layout scaling, text decode, arrowed lines, fixed bar and hover. The portrait lives in portrait.js.
+// Layout scaling, text decode, fixed bar and hover. The portrait lives in portrait.js.
 (() => {
   const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
-  const CURVES = {"0": [{"type": "s", "segs": [["c", [17.0, 704.0], [17.0, 704.0], [555.12, 828.5], [1134.5, 644.0]]]}, {"type": "s", "segs": [["c", [1610.0, 524.0], [1610.0, 524.0], [1820.0, 405.11], [1823.0, 504.3]], ["c", [1823.0, 504.3], [1825.63, 591.14], [1650.08, 724.96], [1606.3, 756.95]]]}, {"type": "f", "segs": [["c", [1596.5, 764.0], [1599.87, 758.97], [1603.48, 751.93], [1604.79, 746.28]], ["l", [1604.79, 746.28], [1607.57, 756.01]], ["l", [1607.57, 756.01], [1615.93, 761.7]], ["c", [1615.93, 761.7], [1610.16, 761.17], [1602.34, 762.38], [1596.5, 764.0]]]}], "1": [{"type": "s", "segs": [["c", [1134.5, 12.5], [1134.5, 12.5], [477.5, 258.11], [44.0, 273.66]], ["c", [44.0, 273.66], [44.0, 273.66], [307.0, 339.55], [305.5, 487.22]], ["c", [305.5, 487.22], [304.0, 634.9], [62.12, 704.25], [62.12, 704.25]], ["c", [62.12, 704.25], [62.12, 704.25], [591.7, 696.65], [890.65, 904.03]]]}, {"type": "f", "segs": [["c", [900.5, 911.0], [894.64, 909.46], [886.81, 908.36], [881.04, 908.97]], ["l", [881.04, 908.97], [889.32, 903.16]], ["l", [889.32, 903.16], [891.97, 893.4]], ["c", [891.97, 893.4], [893.36, 899.02], [897.06, 906.01], [900.5, 911.0]]]}], "2": [{"type": "s", "segs": [["c", [1245.84, 15.5], [1245.84, 15.5], [1133.71, 240.32], [633.56, 262.14]]]}, {"type": "f", "segs": [["c", [621.5, 262.62], [627.07, 260.23], [633.92, 256.29], [638.09, 252.26]], ["l", [638.09, 252.26], [635.14, 261.94]], ["l", [635.14, 261.94], [639.05, 271.26]], ["c", [639.05, 271.26], [634.5, 267.68], [627.28, 264.44], [621.5, 262.62]]]}], "3": [{"type": "s", "segs": [["c", [172.14, 16.25], [172.14, 16.25], [210.73, 170.36], [381.48, 189.63]]]}, {"type": "f", "segs": [["c", [393.5, 190.75], [387.64, 192.28], [380.27, 195.15], [375.54, 198.51]], ["l", [375.54, 198.51], [379.91, 189.39]], ["l", [379.91, 189.39], [377.44, 179.58]], ["c", [377.44, 179.58], [381.41, 183.81], [388.06, 188.09], [393.5, 190.75]]]}], "4": [{"type": "s", "segs": [["c", [738.5, 262.62], [738.5, 262.62], [1162.26, 278.01], [1220.19, 778.75]]]}, {"type": "f", "segs": [["c", [1221.5, 790.75], [1218.75, 785.35], [1214.37, 778.76], [1210.09, 774.86]], ["l", [1210.09, 774.86], [1219.93, 777.19]], ["l", [1219.93, 777.19], [1228.98, 772.68]], ["c", [1228.98, 772.68], [1225.7, 777.45], [1222.94, 784.87], [1221.5, 790.75]]]}]};
   let S = 1;
 
-  // ---------------- navigation (same markup in sheet 2 and in the fixed bar)
+  // ---------------- fixed navigation
   const NAV = [["Product", "#product"], ["Graphic", "#graphic"], ["Urban", "#urban"], ["About", "#about"]];
   function navHTML(list = NAV) { return list.map(([t, h]) => `<a href="${h}">${t}</a>`).join('<span class="sep"> \\ </span>'); }
   document.getElementById("navBar").innerHTML = navHTML([["Home", "#s1"], ...NAV]);
-  const nav2 = document.getElementById("nav2");
-  nav2.dataset.s = "1.55";
 
   // ---------------- work sheets: big title and cards in rows of three (placeholders until a project fills them)
   const COLX = [150, 710, 1270], CARD_W = 500, CARD_H = CARD_W * 381.9 / 571.7, ROW = 680;
@@ -60,46 +57,6 @@
     }
   }
 
-  // ---------------- arrowed lines
-  function segToD(segs) {
-    let d = `M${segs[0][1][0]} ${segs[0][1][1]}`;
-    for (const s of segs) {
-      if (s[0] === "c") d += ` C${s[2][0]} ${s[2][1]} ${s[3][0]} ${s[3][1]} ${s[4][0]} ${s[4][1]}`;
-      else if (s[0] === "l") d += ` L${s[2][0]} ${s[2][1]}`;
-    }
-    return d;
-  }
-  const lineSets = {};
-  for (const svg of document.querySelectorAll(".lines")) {
-    const sec = svg.closest(".sec"), page = svg.dataset.page, h = +sec.dataset.h;
-    svg.setAttribute("viewBox", `0 0 1920 ${h}`); svg.setAttribute("width", 1920); svg.setAttribute("height", h);
-    const strokes = [], heads = [];
-    for (const e of CURVES[page]) {
-      const p = document.createElementNS("http://www.w3.org/2000/svg", "path");
-      p.setAttribute("d", segToD(e.segs) + (e.type === "f" ? " Z" : ""));
-      p.setAttribute("class", e.type === "s" ? "l" : "h");
-      svg.appendChild(p);
-      (e.type === "s" ? strokes : heads).push(p);
-    }
-    // consecutive strokes form one route; the gap between them (hidden behind the portrait) costs time too
-    let total = 0; const parts = [];
-    strokes.forEach((p, i) => {
-      if (i > 0) {
-        const a = strokes[i - 1].getPointAtLength(strokes[i - 1].getTotalLength()), b = p.getPointAtLength(0);
-        total += Math.hypot(b.x - a.x, b.y - a.y);
-      }
-      const L = p.getTotalLength(); parts.push({ p, from: total, L }); total += L;
-      p.style.strokeDasharray = `${L} ${L}`; p.style.strokeDashoffset = L;
-    });
-    lineSets[sec.id] = { parts, heads, total };
-  }
-  function drawLine(id, p) {        // p in 0..1
-    const set = lineSets[id]; if (!set) return;
-    const at = p * set.total;
-    for (const q of set.parts) q.p.style.strokeDashoffset = q.L * (1 - Math.max(0, Math.min(1, (at - q.from) / q.L)));
-    for (const h of set.heads) h.style.opacity = p >= 1 ? 1 : 0;
-  }
-
   // ---------------- decode text: each character arrives as noise and settles, in reading order
   const LATIN = "!#$%&*+-/0123456789<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
   const HAN = "以時代之法應問城市空間設計數據模型算法結構形式方法問題";
@@ -145,22 +102,18 @@
   }
 
   // ---------------- per-sheet timelines (seconds from the moment the sheet comes into view)
-  const plan = {
-    s1:      { portrait: 1.35, line: 1.9, lineDur: 2.4 },
-    s2:      { line: 0.9, lineDur: 2.0 },
-    urban:   { line: 0.5, lineDur: 1.2 },
-    product: { line: 0.5, lineDur: 0.9 },
-    graphic: { line: 0.5, lineDur: 1.3 }
-  };
+  const PORTRAIT_DELAY = 1.35;
   const live = new Map();     // id -> state
   let portraitT0 = null, portraitVisible = true;
   function start(sec) {
     if (live.has(sec.id)) return;
     const st = { sec, t0: performance.now(), ...prepSection(sec), done: false, phs: [...sec.querySelectorAll(".ph")] };
+    st.rule = sec.querySelector(".rule");
+    st.end = Math.max(st.end, ...st.phs.map(p => +p.dataset.d),
+      st.rule ? 0.9 : 0, sec.id === "s1" ? PORTRAIT_DELAY : 0);
     live.set(sec.id, st);
-    if (sec.id === "s2") for (const a of nav2.querySelectorAll("a")) hoverDecode(a, () => st.done);
     for (const a of sec.querySelectorAll(".hit")) hoverDecode(a, () => st.done, a.previousElementSibling);   // the card is the link, its title sits just before it
-    if (reduce) { textFrame(st.items, 1e9); drawLine(sec.id, 1); st.phs.forEach(p => p.classList.add("on")); finishRule(sec); st.done = true;
+    if (reduce) { textFrame(st.items, 1e9); st.phs.forEach(p => p.classList.add("on")); finishRule(sec); st.done = true;
       if (sec.id === "s1" && Portrait.ready) { portraitT0 = performance.now() - 1e6; Portrait.draw(0, 0); } return; }
     kick();
   }
@@ -171,15 +124,13 @@
     raf = 0; let more = false;
     for (const [id, st] of live) {
       if (st.done) continue;
-      const t = (now - st.t0) / 1000, P = plan[id] || {};
+      const t = (now - st.t0) / 1000;
       textFrame(st.items, t);
       for (const p of st.phs) if (t >= +p.dataset.d) p.classList.add("on");
-      const r = st.sec.querySelector(".rule");
+      const r = st.rule;
       if (r) { const q = Math.max(0, Math.min(1, (t - 0.3) / 0.6)); r.style.transform = `scaleX(${1 - Math.pow(1 - q, 3)})`; }
-      if (P.portrait !== undefined && portraitT0 === null && t >= P.portrait && Portrait.ready) { Portrait.prepLanes(); portraitT0 = now; }
-      let lp = 0;
-      if (P.line !== undefined) { lp = Math.max(0, Math.min(1, (t - P.line) / P.lineDur)); drawLine(id, 0.5 - 0.5 * Math.cos(Math.PI * lp)); }
-      if (t > st.end && lp >= 1) st.done = true; else more = true;
+      if (id === "s1" && portraitT0 === null && t >= PORTRAIT_DELAY && Portrait.ready) { Portrait.prepLanes(); portraitT0 = now; }
+      if (t >= st.end) st.done = true; else more = true;
     }
     if (portraitT0 !== null && portraitVisible) {
       const pt = (now - portraitT0) / 1000;
@@ -245,17 +196,6 @@
     }
   }
 
-  // ---------------- fixed bar: shows once the sheet-2 navigation reaches the bar's text line
-  const bar = document.getElementById("bar");
-  function onScroll() {
-    const base = document.getElementById("s2").getBoundingClientRect().top + 1017 * S;
-    const stuck = base <= 41 * S;                            // the nav baseline has reached the bar's baseline
-    bar.classList.toggle("on", stuck);
-    nav2.style.visibility = stuck ? "hidden" : "visible";
-    bar.setAttribute("aria-hidden", String(!stuck));
-  }
-  addEventListener("scroll", onScroll, { passive: true });
-
   // ---------------- start each sheet when it is well inside the view
   const io = new IntersectionObserver(es => es.forEach(e => {
     if (e.target.id === "s1") { portraitVisible = e.isIntersecting; if (e.isIntersecting) kick(); }
@@ -263,20 +203,18 @@
   }), { threshold: [0, 0.3] });
 
   // resizing clears the canvas: the running loop redraws it next frame; before the opening it stays empty
-  addEventListener("resize", () => { fit(); if (Portrait.ready) { Portrait.size(S); if (reduce) Portrait.draw(0, 0); } onScroll(); });
+  addEventListener("resize", () => { fit(); if (Portrait.ready) { Portrait.size(S); if (reduce) Portrait.draw(0, 0); } });
 
   Portrait.load("assets/portrait-map.png").then(async raw => {
     try { await Promise.all([document.fonts.load("italic 700 200px Tinos"), document.fonts.load("700 40px Tinos"), document.fonts.load("italic 22px Tinos"), document.fonts.load("22px Tinos"), document.fonts.load('300 36px "Noto Serif TC"', "以時代之法應問")]); } catch (e) {}
     fit();
     Portrait.build(raw, getComputedStyle(document.body).getPropertyValue("--serif"));
     Portrait.size(S);
-    nav2.innerHTML = navHTML();
     alignBaselines();
     setupBarHover();
     // a link from a project page lands on its sheet: the browser's own jump ran before the sheets had their height
     const target = document.getElementById(location.hash.slice(1));
     if (target) target.scrollIntoView({ behavior: "instant" });
     document.querySelectorAll(".sec").forEach(s => io.observe(s));
-    onScroll();
   });
 })();

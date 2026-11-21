@@ -17,9 +17,6 @@ a { color: inherit; text-decoration: none; }
 .stage { position: absolute; left: 0; top: 0; width: 1920px; transform-origin: 0 0; }
 .stage > .t { position: absolute; margin: 0; white-space: nowrap; line-height: 0; }
 .t span.c, #bar span.c { display: inline-block; }
-.lines { position: absolute; left: 0; top: 0; width: 1920px; pointer-events: none; overflow: visible; }
-.lines path.l { fill: none; stroke: var(--ink); stroke-width: 1; }
-.lines path.h { fill: var(--ink); opacity: 0; }
 
 /* sheet 1 */
 .title { left: 62.1px; top: 247.8px; font: italic 700 230px/0 var(--serif); letter-spacing: -0.04em; z-index: 3; }
@@ -30,45 +27,53 @@ a { color: inherit; text-decoration: none; }
 .edu.b { font-weight: 700; } .edu.i { font-style: italic; }
 .portrait { position: absolute; z-index: 1; }
 .portrait canvas { display: block; width: 100%; height: 100%; }
-#s1 .lines { z-index: 2; }
 
 /* sheet 2 */
-.motto { left: 422px; top: 486.7px; font: 700 39px/0 var(--serif); }
+.motto { left: 422px; top: 350px; font: italic 400 39px/0 var(--serif); }
 .zh    { left: 422px; top: 546.3px; font: 300 36px/0 var(--song); letter-spacing: 18px; }
 .nav   { font: italic 700 39px/0 var(--serif); letter-spacing: 0.1em; }
 .nav a { cursor: pointer; }
 .nav a:hover { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 8px; }
 .nav a:focus-visible { outline: 2px solid var(--ink); outline-offset: 6px; }
 .nav .sep { padding: 0 0.15em; }
-#nav2 { left: 982px; top: 1017px; }
 
 /* sheets 3–5 */
 .cat   { left: 150px; top: 307.2px; font: italic 700 200px/0 var(--serif); letter-spacing: -0.035em; }
 .cat { z-index: 2; }
+#product .cat { top: 347.2px; }
 .urban-note { font: italic 400 36px/0 var(--serif); color: var(--code); }
+#about { background: #000; color: #fff; }
 .about-title { left: 150px; }
 .about-intro { font: 400 31px/0 var(--serif); letter-spacing: -0.01em; }
 .about-label { font: 700 19px/0 var(--serif); letter-spacing: 0.12em; }
 .about-copy { font: 400 20px/0 var(--serif); }
-.about-contact { font: italic 700 24px/0 var(--serif); text-decoration: underline; text-underline-offset: 7px; }
+
+.site-footer { background: #000; color: #fff; padding-inline: 7.8125%; }
+.site-footer-inner { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline;
+  gap: 16px 32px; border-top: 1px solid #666; padding-block: clamp(20px, 2vw, 40px);
+  font-size: clamp(15px, 1.25vw, 24px); }
+.site-footer small { font-size: inherit; }
+.site-footer nav { display: flex; flex-wrap: wrap; gap: 12px clamp(16px, 2vw, 40px); }
+.site-footer a:hover { text-decoration: underline; text-underline-offset: 4px; }
+.site-footer a:focus-visible { outline: 1px solid currentColor; outline-offset: 4px; }
+
 .ph    { position: absolute; background: var(--ph-txt); opacity: 0; transform: translateY(14px); transition: opacity .6s ease, transform .6s ease; }
 .ph.img { background: var(--ph-img); }
 .ph.on { opacity: 1; transform: none; }
 .ph img { display: block; width: 100%; height: 100%; object-fit: cover; }
-.ctitle { font: 700 48px/0 var(--serif); }
+.ctitle { font: 700 42px/0 var(--serif); }
 .cbody  { font: 400 24px/0 var(--serif); }
 .hit   { position: absolute; z-index: 3; }
 .hit:focus-visible { outline: 2px solid var(--ink); outline-offset: 6px; }
 
-/* fixed bar: the sheet-2 navigation sticks here once it reaches the top */
+/* Fixed navigation across the portfolio. */
 #bar { position: fixed; left: 0; right: 0; top: 0; z-index: 20; height: calc(var(--s) * 64px); background: var(--bg);
-  border-bottom: 0.6px solid var(--rule); transform: translateY(-101%); transition: transform .35s ease; overflow: hidden;
+  border-bottom: 0.6px solid var(--rule); overflow: hidden;
   padding-top: env(safe-area-inset-top, 0px); }
-#bar.on { transform: none; }
 #bar .inner { position: absolute; left: 0; top: 0; width: 1920px; height: 64px; transform-origin: 0 0; }
 #bar .nav { position: absolute; right: 150px; top: 41px; line-height: 0; white-space: nowrap; font-size: 24px; }
 #bar .brand { position: absolute; left: 150px; top: 41px; line-height: 0; white-space: nowrap; font: 700 24px/0 var(--serif); }
 #bar .brand:focus-visible { outline: 2px solid var(--ink); outline-offset: 6px; }
 .sec { scroll-margin-top: calc(var(--s) * 64px); }
 
-@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } #bar { transition: none; } .ph { transition: none; } }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } .ph { transition: none; } }
